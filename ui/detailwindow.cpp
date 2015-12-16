@@ -76,13 +76,16 @@ DetailWindow::DetailWindow( QString id, bool nb )
     mDetailed = false;
     
     QShortcut* closesc = new QShortcut( Qt::Key_Escape, this );
-    mTransSC = new QShortcut( Qt::Key_F1, this );
+    /* mTransSC = new QShortcut( Qt::Key_F1, this ); */
    
     connect( closesc, SIGNAL( activated() ),
              this, SLOT( close() ) );
     
-    connect( mTransSC, SIGNAL( activated() ),
-             this, SLOT( translate() ) );
+    /* deactivate, because google kicks us away with a 301 moved reply,
+     * also it is not very wise to send probably customer related data
+     * to google .... even if they claim "do no evil"
+     * connect( mTransSC, SIGNAL( activated() ),
+             this, SLOT( translate() ) );*/
     
     connect( moreDetailButton, SIGNAL( clicked() ), 
              this, SLOT( toggleMoreDetails() ) );
@@ -330,6 +333,8 @@ void DetailWindow::translate()
 void DetailWindow::transaction_done()
 {
     QHttp* http = qobject_cast< QHttp* >( sender() );
+    
+    QString   mytext = http->readAll();
     
     QString   replyText = replyText.fromUtf8( http->readAll() ).split("[").at(1).split("]").at(0);
    

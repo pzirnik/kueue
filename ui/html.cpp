@@ -173,6 +173,7 @@ QString HTML::styleSheet()
 QString HTML::pageHeader( const QString& engineer, int total )
 {
     QString ph;
+    bool used;
     
     ph += QString( "<div id='Head1'>\n"
                    "    <img src='qrc:/images/gfx_top_in.gif' width='32' height='80' border='0'/>\n"
@@ -189,17 +190,54 @@ QString HTML::pageHeader( const QString& engineer, int total )
                    "</div>\n"
                    
                    "<div id='Apptitle' style='left:20px; right:20px; top:0px; height: 80px; z-index: 4'>\n"
+                   "    <div id='AppTitleDiv' class='apptitle2' style='text-align:center; padding-top: 21px; \n"
+                   " padding-bottom: 3px; width: 100%; z-index: 3'>\n"
+		   "<b>Awaiting:</b>&nbsp;" );
+    used = false;
+    if (Settings::showAwaitingCustomer()) {
+      ph += "Customer,&nbsp;";
+      used = true;
+    }
+    if (Settings::showAwaitingSupport()) {
+      ph += "Support,&nbsp;";
+      used = true;
+    }
+    if (Settings::showStatusOthers()) {
+      ph += "Others,&nbsp;";
+      used = true;
+    }
+    if (used) {
+      ph.resize(ph.size()-7);
+    } else {
+      ph += "All";
+    }
+    ph += QString( "&nbsp;&nbsp;<b>Type:</b>&nbsp;" );
+    used = false;
+    if (Settings::showSR()) {
+      ph += "SRs,&nbsp;"; 
+      used = true;
+    }
+    if (Settings::showCR()) {  
+      ph += "CRs,&nbsp;";
+      used = true;
+    }
+    if (used) {
+      ph.resize(ph.size()-7);
+    } else {
+      ph += "No Filter set";
+    }
+    ph += QString( "</br><small>F1=Support | F2=Customer | F3=Others | F4=All | F5=Expand/Colapse | F6=ToogleSortType | F7=ToogleSortOrder</small></div></div>"
+		   "<div id='Apptitle' style='left:20px; right:20px; top:0px; height: 80px; z-index: 4'>\n"
                    "    <div id='AppTitleDiv' class='apptitle2' style='text-align:right; padding-top: 21px; \n"
                    " padding-bottom: 3px; width: 100%; z-index: 3'>\n"
-                   "         SRs total:&nbsp;" + QString::number( total ) + "<br>\n" );
-
+                   "<b>Total Tickets:</b>&nbsp;" + QString::number( total ) + "<br><b>Sorted by:</b>&nbsp;\n" );
     if ( Settings::sortAge() )
     {
-        ph += "Sorted by age"; 
+        ph += "age"; 
     }
     else 
     {    
-        ph += "Sorted by last activity";
+        ph += "last activity";
     }
 
     ph += QString( "<br>\n"
@@ -216,43 +254,78 @@ QString HTML::pageHeader( const QString& engineer, int total )
 QString HTML::subPageHeader( int total )
 {
     QString ph;
+    bool used;
     
     ph += QString( "<div id='Head1'>\n"
-    "    <img src='qrc:/images/gfx_top_in.gif' width='32' height='80' border='0'/>\n"
-    "</div>\n"
-    
-    "<div id='Apptitle' style='left:30px; right:60px; top:0px; height: 80px'>\n"
-    "    <div id='AppTitleDiv' class='apptitle1' style='padding-top: 3px; padding-bottom: 3px; width: 100%'>\n"
-    "        <b>Subowned SRs</b>\n"
-    "    </div>\n"
-    "</div>\n"
-    
-    "<div id='logo' style='z-index:2'>\n"
-    "    <img src='qrc:/images/logo_im.gif' width='175' height='80' border='0'>\n"
-    "</div>\n"
-    
-    "<div id='Apptitle' style='left:20px; right:20px; top:0px; height: 80px; z-index: 4'>\n"
-    "    <div id='AppTitleDiv' class='apptitle2' style='text-align:right; padding-top: 21px; \n"
-    " padding-bottom: 3px; width: 100%; z-index: 3'>\n"
-    "         SRs total:&nbsp;" + QString::number( total ) + "<br>\n" );
-    
+                   "    <img src='qrc:/images/gfx_top_in.gif' width='32' height='80' border='0'/>\n"
+                   "</div>\n"
+                   "<div id='Apptitle' style='left:30px; right:60px; top:0px; height: 80px'>\n"
+                   "    <div id='AppTitleDiv' class='apptitle1' style='padding-top: 3px; padding-bottom: 3px; width: 100%'>\n"
+                   "        <b>Subowned SRs</b>\n"
+                   "    </div>\n"
+                   "</div>\n"
+                   "<div id='logo' style='z-index:2'>\n"
+                   "    <img src='qrc:/images/logo_im.gif' width='175' height='80' border='0'>\n"
+                   "</div>\n"
+                   "<div id='Apptitle' style='left:20px; right:20px; top:0px; height: 80px; z-index: 4'>\n"
+                   "    <div id='AppTitleDiv' class='apptitle2' style='text-align:center; padding-top: 21px; \n"
+                   " padding-bottom: 3px; width: 100%; z-index: 3'>\n"
+		   "<b>Awaiting:</b>&nbsp;" );
+    used=false;
+    if (Settings::subShowAwaitingCustomer()) {
+      ph += "Customer,&nbsp;";
+      used = true;
+    }
+    if (Settings::subShowAwaitingSupport()) {
+      ph += "Support,&nbsp;";
+      used = true;
+    }
+    if (Settings::subShowStatusOthers()) {
+      ph += "Others,&nbsp;";
+      used = true;
+    }
+    if (used) {
+      ph.resize(ph.size()-7);
+    } else {
+      ph += "All";
+    }
+    ph += QString( "&nbsp;&nbsp;<b>Type:</b>&nbsp;" );
+    used = false;
+    if (Settings::subShowSR()) {
+      ph += "SRs,&nbsp;";
+      used=true;
+    }
+    if (Settings::subShowCR()) {  
+      ph += "CRs,&nbsp;";
+      used=true;
+    }
+    if (used) {
+      ph.resize(ph.size()-7);
+    } else {
+      ph += "No Filter set";
+    }
+    ph += QString( "</br><small>F1=Support | F2=Customer | F3=Others | F4=All | F5=Expand/Colapse | F6=ToogleSortType | F7=ToogleSortOrder</small></div></div>"
+		   "<div id='Apptitle' style='left:20px; right:20px; top:0px; height: 80px; z-index: 4'>\n"
+                   "    <div id='AppTitleDiv' class='apptitle2' style='text-align:right; padding-top: 21px; \n"
+                   " padding-bottom: 3px; width: 100%; z-index: 3'>\n"
+                   "<b>Total Tickets:</b>&nbsp;" + QString::number( total ) + "<br><b>Sorted by:</b>&nbsp;\n" );
     if ( Settings::subSortAge() )
     {
-        ph += "Sorted by age"; 
+        ph += "age"; 
     }
     else 
     {    
-        ph += "Sorted by last activity";
+        ph += "last activity";
     }
-    
+
     ph += QString( "<br>\n"
-    "    </div>\n"
-    "</div>\n"
-    "<div id='logo' style='z-index:2'>\n"
-    "    <img src='qrc:/images/logo_im.gif' width='175' height='80' border='0'>\n"
-    "</div>\n"
-    "<div id='content'>\n" );
-    
+                   "    </div>\n"
+                   "</div>\n"
+                   "<div id='logo' style='z-index:2'>\n"
+                   "    <img src='qrc:/images/logo_im.gif' width='175' height='80' border='0'>\n"
+                   "</div>\n"
+                   "<div id='content'>\n" );
+        
     return ph;
 }
 
@@ -534,8 +607,19 @@ QString HTML::qmonPageHeader()
                    "<div id='AppTitleDiv' class='apptitle1' style='padding-top: 3px; padding-bottom: 3px; width: 100%'>"
                    "<b>Queue Monitor</b>"
                    "</div></div></a>"
+		   "<div id='Apptitle' style='left:20px; right:20px; top:10px; height: 80px; z-index: 4'>"
+                   "<div id='AppTitleDiv' class='apptitle2' style='text-align:center; padding-top: 21px;"
+                   " padding-bottom: 3px; width: 100%; z-index: 3'>"
+                   "<small>F1 = Emea | F2 = Usa F3 = Asiapac | F4 = All</small>"
+		   "</div></div>"
+		   "<div id='Apptitle' style='left:20px; right:20px; top:10px; height: 80px; z-index: 4'>"
+                   "<div id='AppTitleDiv' class='apptitle2' style='text-align:right; padding-top: 21px;"
+                   " padding-bottom: 3px; width: 100%; z-index: 3'>"
+                   "<b>Active:</b>&nbsp;" + Settings::qmonFilter() + 
+                   "</div>"
+                   "</div>"
                    "<div id='logo1' style='z-index:3'>"
-                   "<img src='qrc:/images/logo_im_end.gif' width='12' height='80' border='0'></div>" 
+                   "<img src='qrc:/images/logo_im_end.gif' width='12' height='80' border='0'></div>"
                    "<div id='content'>" );
 
     return ph;

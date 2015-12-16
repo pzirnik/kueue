@@ -353,7 +353,7 @@ void UnityBrowser::contextMenu( QMouseEvent* event, const QString& id )
         QAction* bz = new QAction( "Open in bugzilla...", menu );
         
         QWidgetAction* wa = new QWidgetAction( menu );
-     
+        
         connect( his, SIGNAL( triggered(bool)),
                 this, SLOT( historyBack()) );
         
@@ -561,83 +561,81 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
     
     QMenu* slesmenu = new QMenu( "SUSE Linux Enterprise Server", menu );
     
+    slesmenu->addAction( "SUSE Linux Enterprise Server 12 SP1", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Server 12", this, SLOT( fillOutProduct() ) );
-          
+    slesmenu->addAction( "SUSE Linux Enterprise Live Patching 12", this, SLOT( fillOutProduct() ) );
+              
     slesmenu->addSeparator();
     
-    slesmenu->addAction( "SUSE Linux Enterprise Server 11", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP1", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP2", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP4", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP3", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP2", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP1", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 11", this, SLOT( fillOutProduct() ) );
     
     slesmenu->addSeparator();
     
-    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP1 for VMware", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP2 for VMware", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP3 for VMware", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP2 for VMware", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 11 SP1 for VMware", this, SLOT( fillOutProduct() ) );
     
     slesmenu->addSeparator();
     
-    slesmenu->addAction( "SUSE Linux Enterprise Server 10", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 10 SP1", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 10 SP2", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 10 SP3", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Server 10 SP4", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 10 SP3", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 10 SP2", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 10 SP1", this, SLOT( fillOutProduct() ) );
+    slesmenu->addAction( "SUSE Linux Enterprise Server 10", this, SLOT( fillOutProduct() ) );
     
     slesmenu->addSeparator();
     
-    slesmenu->addAction( "SUSE Linux Enterprise Server 9", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 9 SP1", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 9 SP2", this, SLOT( fillOutProduct() ) );
-    slesmenu->addAction( "SUSE Linux Enterprise Server 9 SP3", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Server 9 SP4", this, SLOT( fillOutProduct() ) );
-    
+      
     slesmenu->addSeparator();
     
-    QMenu* haemenu = new QMenu( "SUSE Linux Enterprise High Availability Extension", slesmenu );
-    
-    haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 11", this, SLOT( fillOutProduct() ) );
-    haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 11 SP1", this, SLOT( fillOutProduct() ) );
-    haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 11 SP2", this, SLOT( fillOutProduct() ) );
+    QMenu* haemenu = new QMenu( "SUSE Linux Enterprise High Availability Extension", menu );
+   
+    haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 12", this, SLOT( fillOutProduct() ) ); 
     haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 11 SP3", this, SLOT( fillOutProduct() ) );
+    haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 11 SP2", this, SLOT( fillOutProduct() ) );
+    haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 11 SP1", this, SLOT( fillOutProduct() ) );
+    haemenu->addAction( "SUSE Linux Enterprise High Availability Extension 11", this, SLOT( fillOutProduct() ) );
     
     haemenu->addSeparator();
     
-    haemenu->addAction( "GEO Clustering for SUSE Linux Enterprise High Availability Extension 11 SP2", this, SLOT( fillOutProduct() ) );
+    haemenu->addAction( "GEO Clustering for SUSE Linux Enterprise High Availability Extension 12", this, SLOT( fillOutProduct() ) );
     haemenu->addAction( "GEO Clustering for SUSE Linux Enterprise High Availability Extension 11 SP3", this, SLOT( fillOutProduct() ) );
-        
-    slesmenu->addMenu( haemenu );
+    haemenu->addAction( "GEO Clustering for SUSE Linux Enterprise High Availability Extension 11 SP2", this, SLOT( fillOutProduct() ) );
+            
+    QMenu* rtmenu = new QMenu( "SUSE Linux Enterprise Real Time", menu );
     
-    QMenu* rtmenu = new QMenu( "SUSE Linux Enterprise Real Time", slesmenu );
-    
-    rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP1", this, SLOT( fillOutProduct() ) );
-    rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP2", this, SLOT( fillOutProduct() ) );
     rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP3", this, SLOT( fillOutProduct() ) );
+    rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP2", this, SLOT( fillOutProduct() ) );
+    rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP1", this, SLOT( fillOutProduct() ) );
     
     rtmenu->addSeparator();
     
-    rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP1", this, SLOT( fillOutProduct() ) );
-    rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP2", this, SLOT( fillOutProduct() ) );
     rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP3", this, SLOT( fillOutProduct() ) );
+    rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP2", this, SLOT( fillOutProduct() ) );
+    rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP1", this, SLOT( fillOutProduct() ) );
     
-    slesmenu->addMenu( rtmenu );
-    
-    QMenu* posmenu = new QMenu( "SUSE Linux Enterprise Point of Service", slesmenu );
+    QMenu* posmenu = new QMenu( "SUSE Linux Enterprise Point of Service", menu );
 
+    posmenu->addAction( "SUSE Linux Enterprise Point of Service 11 SP3", this, SLOT( fillOutProduct() ) );
+    posmenu->addAction( "SUSE Linux Enterprise Point of Service 11 SP2", this, SLOT( fillOutProduct() ) );
+    posmenu->addAction( "SUSE Linux Enterprise Point of Service 11 SP1", this, SLOT( fillOutProduct() ) );
     posmenu->addAction( "SUSE Linux Enterprise Point of Service 11", this, SLOT( fillOutProduct() ) );
     posmenu->addAction( "SUSE Linux Enterprise Point of Service 10", this, SLOT( fillOutProduct() ) );
 
-    slesmenu->addMenu( posmenu );
-    
     QMenu* smtmenu = new QMenu( "Subscription Management Tool", menu );
 
     smtmenu->addAction( "Subscription Management Tool 11", this, SLOT( fillOutProduct() ) );
     smtmenu->addAction( "Subscription Management Tool 10", this, SLOT( fillOutProduct() ) );
-
-    QMenu* manmenu = new QMenu( "SUSE Manager", menu );
     
-    manmenu->addAction( "SUSE Manager 1.2", this, SLOT( fillOutProduct() ) );
-    manmenu->addAction( "SUSE Manager Proxy Server 1.2", this, SLOT( fillOutProduct() ) );
+    QMenu* manmenu = new QMenu( "SUSE Manager", menu );
+
+    manmenu->addAction( "SUSE Manager 2.1 Server", this, SLOT( fillOutProduct() ) );
+    manmenu->addAction( "SUSE Manager 2.1 Proxy", this, SLOT( fillOutProduct() ) );
     
     manmenu->addSeparator();
     
@@ -646,34 +644,40 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
     manmenu->addAction( "SUSE Manager 1.7 Proxy", this, SLOT( fillOutProduct() ) );
     
     manmenu->addSeparator();
-
-    manmenu->addAction( "SUSE Manager 2.1 Server", this, SLOT( fillOutProduct() ) );
-    manmenu->addAction( "SUSE Manager 2.1 Proxy", this, SLOT( fillOutProduct() ) );
+    
+    manmenu->addAction( "SUSE Manager 1.2", this, SLOT( fillOutProduct() ) );
+    manmenu->addAction( "SUSE Manager Proxy Server 1.2", this, SLOT( fillOutProduct() ) );
 
     manmenu->addSeparator();
     
-    manmenu->addAction( "SUSE Manager Management Pack for Microsoft System Center 1.3", this, SLOT( fillOutProduct() ) );
+    manmenu->addAction( "SUSE Manager Management Pack for Microsoft System Center", this, SLOT( fillOutProduct() ) );
+
+    QMenu* strmenu = new QMenu( "SUSE Storage", menu);
+
+    strmenu->addAction( "SUSE Enterprise Storage 1", this, SLOT( fillOutProduct() ) );
         
     QMenu* atkmenu = new QMenu( "SUSE Appliance Toolkit", menu );
     
-    atkmenu->addAction( "SUSE Lifecycle Management Server 1.2 [Appliance - Tools]", this, SLOT( fillOutProduct() ) );
     atkmenu->addAction( "SUSE Lifecycle Management Server 1.3", this, SLOT( fillOutProduct() ) );
-    
+    atkmenu->addAction( "SUSE Lifecycle Management Server 1.2 [Appliance - Tools]", this, SLOT( fillOutProduct() ) );
+        
     atkmenu->addSeparator();
     
-    atkmenu->addAction( "SUSE Studio Onsite 1.2 [Appliance - Studio]", this, SLOT( fillOutProduct() ) );
     atkmenu->addAction( "SUSE Studio Onsite 1.3", this, SLOT( fillOutProduct() ) );
-    
+    atkmenu->addAction( "SUSE Studio Onsite 1.2 [Appliance - Studio]", this, SLOT( fillOutProduct() ) );
+        
     atkmenu->addSeparator();
     
-    atkmenu->addAction( "WebYaST 1.1", this, SLOT( fillOutProduct() ) );
     atkmenu->addAction( "WebYaST 1.2", this, SLOT( fillOutProduct() ) );
-    
+    atkmenu->addAction( "WebYaST 1.1", this, SLOT( fillOutProduct() ) );
+        
     QMenu* cloudmenu = new QMenu( "SUSE Cloud", menu );
     
-    cloudmenu->addAction( "SUSE Cloud 1.0", this, SLOT( fillOutProduct() ) );
-    cloudmenu->addAction( "SUSE Cloud 2.0", this, SLOT( fillOutProduct() ) );
+    cloudmenu->addAction( "SUSE Cloud 5", this, SLOT( fillOutProduct() ) );
+    cloudmenu->addAction( "SUSE Cloud 4", this, SLOT( fillOutProduct() ) );
     cloudmenu->addAction( "SUSE Cloud 3", this, SLOT( fillOutProduct() ) );
+    cloudmenu->addAction( "SUSE Cloud 2.0", this, SLOT( fillOutProduct() ) );
+    cloudmenu->addAction( "SUSE Cloud 1.0", this, SLOT( fillOutProduct() ) );
     
     QMenu* sledmenu = new QMenu( "SUSE Linux Enterprise Desktop", menu );
     
@@ -681,49 +685,58 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
 
     sledmenu->addSeparator();      
 
-    sledmenu->addAction( "SUSE Linux Enterprise Desktop 11", this, SLOT( fillOutProduct() ) );
-    sledmenu->addAction( "SUSE Linux Enterprise Desktop 11 SP1", this, SLOT( fillOutProduct() ) );
-    sledmenu->addAction( "SUSE Linux Enterprise Desktop 11 SP2", this, SLOT( fillOutProduct() ) );
     sledmenu->addAction( "SUSE Linux Enterprise Desktop 11 SP3", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 11 SP2", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 11 SP1", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 11", this, SLOT( fillOutProduct() ) );
     
     sledmenu->addSeparator();
     
-    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10", this, SLOT( fillOutProduct() ) );
-    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10 SP1", this, SLOT( fillOutProduct() ) );
-    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10 SP2", this, SLOT( fillOutProduct() ) );
-    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10 SP3", this, SLOT( fillOutProduct() ) );
     sledmenu->addAction( "SUSE Linux Enterprise Desktop 10 SP4", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10 SP3", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10 SP2", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10 SP1", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 10", this, SLOT( fillOutProduct() ) );
     
     QMenu* oesmenu = new QMenu( "Open Enterprise Server", menu );
     
-    oesmenu->addAction( "Open Enterprise Server 11 (OES 11)", this, SLOT( fillOutProduct() ) );
-    oesmenu->addAction( "Open Enterprise Server 11.1", this, SLOT( fillOutProduct() ) );
-    oesmenu->addAction( "Open Enterprise Server 11.2 (OES 11 SP2)", this, SLOT( fillOutProduct() ) );
+    oesmenu->addAction( "Open Enterprise Server 2015 (OES 2015) (Altair)", this, SLOT( fillOutProduct() ) );
     
     oesmenu->addSeparator();
     
-    oesmenu->addAction( "Open Enterprise Server 2.0.1", this, SLOT( fillOutProduct() ) );
-    oesmenu->addAction( "Open Enterprise Server 2.0.2", this, SLOT( fillOutProduct() ) );
-    oesmenu->addAction( "Open Enterprise Server 2.0.3", this, SLOT( fillOutProduct() ) );
+    oesmenu->addAction( "Open Enterprise Server 2.0.3 (OES 2 SP3)", this, SLOT( fillOutProduct() ) );
+
+    oesmenu->addSeparator();
+
+    oesmenu->addAction( "Open Enterprise Server 11.2 (OES 11 SP2)", this, SLOT( fillOutProduct() ) );
+        
+    QMenu* rhmenu = new QMenu( "Red Hat", menu );
     
-    QMenu* rhmenu = new QMenu( "Red Hat Expanded Support", menu );
-    
-    rhmenu->addAction( "RES 5 Expanded Support", this, SLOT( fillOutProduct() ) );
+    rhmenu->addAction( "RES 7 Expanded Support", this, SLOT( fillOutProduct() ) );
     rhmenu->addAction( "RES 6 Expanded Support", this, SLOT( fillOutProduct() ) );
+    rhmenu->addAction( "RES 5 Expanded Support", this, SLOT( fillOutProduct() ) );
+
+    rhmenu->addSeparator();
+
+    rhmenu->addAction( "RES 7 HA Expanded Support", this, SLOT( fillOutProduct() ) );
     rhmenu->addAction( "RES 6 HA Expanded Support", this, SLOT( fillOutProduct() ) );
     
     QMenu* filrmenu = new QMenu( "Filr", menu );
     
-    filrmenu->addAction( "Filr 1.0", this, SLOT( fillOutProduct() ) );
     filrmenu->addAction( "Filr 1.0.1", this, SLOT( fillOutProduct() ) );
+    filrmenu->addAction( "Filr 1.0", this, SLOT( fillOutProduct() ) );
     
     menu->addMenu( slesmenu );
     menu->addMenu( sledmenu );
     menu->addSeparator();
+    menu->addMenu( haemenu );
     menu->addMenu( atkmenu );
     menu->addMenu( cloudmenu );
     menu->addMenu( smtmenu );
     menu->addMenu( manmenu );
+    menu->addMenu( strmenu );
+    menu->addMenu( rtmenu );
+    menu->addMenu( posmenu );
     menu->addSeparator();
     menu->addMenu( rhmenu );
     menu->addSeparator();
@@ -745,7 +758,7 @@ void UnityBrowser::fillOutProduct()
     
     else if ( action->text().startsWith( "SUSE Cloud" ) )
     {
-        mUnityPage->fillOutProduct( "SUSE Linux Enterprise Server", action->text() );
+        mUnityPage->fillOutProduct( "SUSE Cloud", action->text() );
     }
     
     else if ( action->text().startsWith( "RES" ) )
@@ -768,6 +781,11 @@ void UnityBrowser::fillOutProduct()
     else if ( action->text().startsWith( "SUSE Manager" ) )
     {
         mUnityPage->fillOutProduct( "SUSE Manager", action->text() );
+    }
+
+    else if ( action->text().startsWith( "SUSE Enterprise Storage" ) )
+    {
+	mUnityPage->fillOutProduct( "SUSE Storage", action->text() );
     }
     
     else if ( action->text().startsWith( "SUSE Linux Enterprise High Availability Extension" ) )
@@ -942,12 +960,12 @@ bool UnityBrowser::isEngineerField( QWebElement element )
 void UnityBrowser::openInBugzilla()
 {
     QAction* a = qobject_cast< QAction* >( sender() );
-    QDesktopServices::openUrl( "https://bugzilla.novell.com/show_bug.cgi?id=" + a->data().toString() );
+    QDesktopServices::openUrl( "https://bugzilla.suse.com/show_bug.cgi?id=" + a->data().toString() );
 }
 
 QWebPage* UnityBrowser::newWindow()
 {
-    PopupWindow* p = new PopupWindow( page()->networkAccessManager(), this, mShowPopup, currentSR() );
+    PopupWindow* p = new PopupWindow( page()->networkAccessManager(), this, mShowPopup );
     mShowPopup = true;
     return p->webPage();
 }

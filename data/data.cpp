@@ -600,6 +600,16 @@ void Data::updateQueueBrowser( const QString& filter )
         {
             //qDebug() << "[QUEUEBROWSER] Skipping 3" << sr.status << sr.id;
         }
+        else if ( !Settings::showCR() &&
+          ( sr.srtype == "cr" ) )
+        {
+          //qDebug() << "[QUEUEBROWSER] Skipping 4" << sr.srtype;
+        }
+        else if ( !Settings::showSR() &&
+          ( sr.srtype == "sr" ) )
+        {
+          //qDebug() << "[QUEUEBROWSER] Skipping 5" << sr.srtype;
+        }
         else
         {
             html += HTML::SRTable( srlist.at( i ) );
@@ -639,18 +649,18 @@ void Data::updateSubownerBrowser( const QString& filter )
         {
             QueueSR sr = srlist.at( i );
             
-            if ( !Settings::showAwaitingCustomer() && 
+            if ( !Settings::subShowAwaitingCustomer() && 
                 sr.status == "Awaiting Customer" )
             {
                 qDebug() << "[QUEUEBROWSER] Skipping" << sr.status << sr.id;
             }
-            else if ( !Settings::showAwaitingSupport() && 
+            else if ( !Settings::subShowAwaitingSupport() && 
                 ( sr.status == "Awaiting Technical Support" ||
                 sr.status == "Awaiting Novell Support" ) )
             {
                 qDebug() << "[QUEUEBROWSER] Skipping 2" << sr.status << sr.id;
             }
-            else if ( !Settings::showStatusOthers() &&
+            else if ( !Settings::subShowStatusOthers() &&
                 ( sr.status == "Suspended" ||
                 sr.status == "Unassigned" ||
                 sr.status == "Assigned" ||
@@ -664,6 +674,16 @@ void Data::updateSubownerBrowser( const QString& filter )
             {
                 qDebug() << "[QUEUEBROWSER] Skipping 3" << sr.status << sr.id;
             }
+            else if ( !Settings::subShowCR() &&
+              ( sr.srtype == "cr" ) )
+            {
+              //qDebug() << "[QUEUEBROWSER] Skipping 4" << sr.srtype;
+            }
+            else if ( !Settings::subShowCR() &&
+              ( sr.srtype == "sr" ) )
+            {
+              //qDebug() << "[QUEUEBROWSER] Skipping 5" << sr.srtype;
+            } 
             else
             {
                 html += HTML::SRTable( sr );

@@ -615,8 +615,8 @@ QMenu* TabWidget::kueueMainMenu()
     mActionSubSortAge->setText( "Age" );
     mActionSubSortAge->setCheckable( true );
     
-    sortby->addAction( mActionSubSortUpdate );
-    sortby->addAction( mActionSubSortAge );
+    subsortby->addAction( mActionSubSortUpdate );
+    subsortby->addAction( mActionSubSortAge );
     
     sub->addMenu( subsortby );
     
