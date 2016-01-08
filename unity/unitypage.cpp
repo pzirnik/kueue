@@ -880,7 +880,9 @@ void UnityPage::getCurrentSR()
     {
         bool keep = false;
         QString srnr = mViewFrame->findFirstElement( "span#s_1_1_71_0" ).toInnerXml().trimmed();
-        
+        if (!Kueue::isSrNr(srnr)) {
+          srnr="";
+        }
         if ( !srnr.isEmpty() )
         {
             mCurrentSR = srnr;
@@ -897,6 +899,10 @@ void UnityPage::getCurrentSR()
                     fc.at( i ).attribute( "value" ).contains( Settings::engineer().toUpper() ) )
                 {
                     QString csr = fc.at( i ).attribute( "value" ).remove( Settings::engineer().toUpper() + ":" );
+    
+                    if (!Kueue::isSrNr(csr)) {
+                      continue;
+                    }
                     
                     if ( mCurrentSR != csr )
                     {
