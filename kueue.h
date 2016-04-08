@@ -99,7 +99,7 @@ namespace Kueue
     
     static bool isSrNr( const QString& data )
     {
-        QRegExp srnr( "^[0-9]{11}$" );
+        QRegExp srnr( "^[0-9]{11,12}$" );
     
         if ( srnr.exactMatch( data.trimmed() ) )
         {
