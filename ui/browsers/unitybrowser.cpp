@@ -634,6 +634,10 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
     
     QMenu* manmenu = new QMenu( "SUSE Manager", menu );
 
+    manmenu->addAction( "SUSE Manager 3 Server", this, SLOT( fillOutProduct() ) );
+    
+    manmenu->addSeparator();
+    
     manmenu->addAction( "SUSE Manager 2.1 Server", this, SLOT( fillOutProduct() ) );
     manmenu->addAction( "SUSE Manager 2.1 Proxy", this, SLOT( fillOutProduct() ) );
     
