@@ -561,6 +561,7 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
     
     QMenu* slesmenu = new QMenu( "SUSE Linux Enterprise Server", menu );
     
+    slesmenu->addAction( "SUSE Linux Enterprise Server 12 SP2", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Server 12 SP1", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Server 12", this, SLOT( fillOutProduct() ) );
     slesmenu->addAction( "SUSE Linux Enterprise Live Patching 12", this, SLOT( fillOutProduct() ) );
@@ -609,12 +610,6 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
             
     QMenu* rtmenu = new QMenu( "SUSE Linux Enterprise Real Time", menu );
     
-    rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP3", this, SLOT( fillOutProduct() ) );
-    rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP2", this, SLOT( fillOutProduct() ) );
-    rtmenu->addAction( "SUSE Linux Enterprise Real Time 10 SP1", this, SLOT( fillOutProduct() ) );
-    
-    rtmenu->addSeparator();
-    
     rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP3", this, SLOT( fillOutProduct() ) );
     rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP2", this, SLOT( fillOutProduct() ) );
     rtmenu->addAction( "SUSE Linux Enterprise Real Time Extension 11 SP1", this, SLOT( fillOutProduct() ) );
@@ -658,7 +653,8 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
 
     QMenu* strmenu = new QMenu( "SUSE Storage", menu);
 
-    strmenu->addAction( "SUSE Enterprise Storage 1", this, SLOT( fillOutProduct() ) );
+    strmenu->addAction( "SUSE Enterprise Storage 3", this, SLOT( fillOutProduct() ) );
+    strmenu->addAction( "SUSE Enterprise Storage 2.1", this, SLOT( fillOutProduct() ) );
         
     QMenu* atkmenu = new QMenu( "SUSE Appliance Toolkit", menu );
     
@@ -677,15 +673,17 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
         
     QMenu* cloudmenu = new QMenu( "SUSE Cloud", menu );
     
-    cloudmenu->addAction( "SUSE Cloud 5", this, SLOT( fillOutProduct() ) );
-    cloudmenu->addAction( "SUSE Cloud 4", this, SLOT( fillOutProduct() ) );
-    cloudmenu->addAction( "SUSE Cloud 3", this, SLOT( fillOutProduct() ) );
+    cloudmenu->addAction( "SUSE OpenStack Cloud 6", this, SLOT( fillOutProduct() ) );
+    cloudmenu->addAction( "SUSE Openstack Cloud 5", this, SLOT( fillOutProduct() ) );
     cloudmenu->addAction( "SUSE Cloud 2.0", this, SLOT( fillOutProduct() ) );
     cloudmenu->addAction( "SUSE Cloud 1.0", this, SLOT( fillOutProduct() ) );
     
     QMenu* sledmenu = new QMenu( "SUSE Linux Enterprise Desktop", menu );
     
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 12 SP2", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Desktop 12 SP1", this, SLOT( fillOutProduct() ) );
     sledmenu->addAction( "SUSE Linux Enterprise Desktop 12", this, SLOT( fillOutProduct() ) );
+    sledmenu->addAction( "SUSE Linux Enterprise Workstation Extension 12", this, SLOT( fillOutProduct() ) );
 
     sledmenu->addSeparator();      
 

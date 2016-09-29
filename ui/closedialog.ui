@@ -49,6 +49,11 @@
      </item>
      <item>
       <property name="text">
+       <string>No Response from Customer</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>No Charge Awaiting Engineering</string>
       </property>
      </item>

@@ -549,7 +549,7 @@ QString HTML::SRTable( QueueSR sr )
     {
         srtab+=( "<tr>"
                     "<td class='gadgetText'>&nbsp;Bug</td>"
-                    "<td class='gadgetText'><a href='https://bugzilla.novell.com/show_bug.cgi?id=" + sr.bug + "'>" + 
+                    "<td class='gadgetText'><a href='https://bugzilla.suse.com/show_bug.cgi?id=" + sr.bug + "' target='_blank'>" + 
                     sr.bug + " (" + sr.bugtitle + ")</a></td>"
                 "</tr>" );
     }
