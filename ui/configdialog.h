@@ -62,7 +62,6 @@ class ConfigDialog : public QDialog, private Ui_ConfigDialog
         void queueJobDone();
         
         void toggleSystemTray( const bool& );
-        void toggleSsl(const bool& );
         void toggleMonitor( const bool& );
         void toggleQboss( const bool& );
         void toggleNotifications( const bool& );

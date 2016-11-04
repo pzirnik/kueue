@@ -112,8 +112,6 @@ ConfigDialog::ConfigDialog( QWidget *parent )
              this, SLOT( playHighNotificationSound() ) );
     connect( cfg_showSystemTray, SIGNAL( toggled( bool ) ), 
              this, SLOT( toggleSystemTray( bool ) ) );
-    connect( cfg_enableSsl, SIGNAL( toggled( bool ) ), 
-             this, SLOT( toggleSsl( bool ) ) );
     connect( cfg_monitorEnabled, SIGNAL( toggled( bool ) ),
              this, SLOT( toggleMonitor( bool ) ) );
     connect( cfg_qbossFeatures, SIGNAL( toggled( bool ) ),
