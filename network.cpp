@@ -65,11 +65,20 @@ Network::~Network()
     qDebug() << "[NETWORK] Destroying";
 }
 
-QNetworkReply* Network::getImpl( const QString& u )
+QNetworkReply* Network::getImpl( const QString& u, bool auth )
 {
     QNetworkReply* reply;
+    QNetworkRequest request;
     
-    QNetworkRequest request( QUrl( "http://" + Settings::dBServer() + ":8080/" + u ) );
+    
+    if (Settings::enableSsl()) {
+      request.setUrl("https://" + Settings::dBServer() + ":8081/" + u );
+      QSslConfiguration config = request.sslConfiguration();
+      config.setPeerVerifyMode(QSslSocket::VerifyNone);
+      request.setSslConfiguration(config);
+    } else {
+      request.setUrl("http://" + Settings::dBServer() + ":8080/" + u );
+    }
     QByteArray os;
     
 #ifdef IS_WIN32
@@ -80,6 +89,13 @@ QNetworkReply* Network::getImpl( const QString& u )
     os = "kueue " + QApplication::applicationVersion().toUtf8() + " (linux)";
 #endif
     request.setRawHeader( "User-Agent", os );
+    
+    if (auth && Settings::enableSsl()) {
+       QByteArray credentials;
+       credentials.append(Settings::engineer() + ":" + Settings::unityPassword());
+       credentials.toBase64();
+       request.setRawHeader( "Authorization", "Basic " + credentials );
+    }
         
     reply = mNAM->get( request );
         

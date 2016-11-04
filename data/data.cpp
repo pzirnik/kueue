@@ -99,11 +99,20 @@ Data::~Data()
     QSqlDatabase::removeDatabase( mDB );
 }
 
-QNetworkReply* Data::get( const QString& u )
+QNetworkReply* Data::get( const QString& u, bool auth )
 {
     //int r = qrand() % mIPs.size();
     //QNetworkRequest request( QUrl( "http://" + mIPs.at(r) + ":8080/" + u ) );
-    QNetworkRequest request( QUrl( "http://" + Settings::dBServer() + ":8080/" + u ) );
+    QNetworkRequest request;
+    
+    if (Settings::enableSsl()) {
+      request.setUrl( "https://" + Settings::dBServer() + ":8081/" + u );
+      QSslConfiguration config = request.sslConfiguration();
+      config.setPeerVerifyMode(QSslSocket::VerifyNone);
+      request.setSslConfiguration(config);
+    } else {
+       request.setUrl( "http://" + Settings::dBServer() + ":8080/" + u );
+    }
     
     QByteArray os;
     
@@ -117,6 +126,12 @@ QNetworkReply* Data::get( const QString& u )
     
     request.setRawHeader( "User-Agent", os );
     
+    if (auth && Settings::enableSsl()) {
+       QByteArray credentials;
+       credentials.append(Settings::engineer() + ":" + Settings::unityPassword());
+       request.setRawHeader( "Authorization", "Basic " + credentials.toBase64() );
+    }
+     
     QNetworkReply* reply = mNAM->get( request );
     
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
@@ -145,7 +160,7 @@ void Data::updateQueue()
 {
     if ( !mQueueUpdateRunning )
     { 
-        QNetworkReply* r = get( "userqueue/full/" + Settings::engineer() );
+        QNetworkReply* r = get( "userqueue/full/" + Settings::engineer(), true );
     
         connect( r, SIGNAL( finished() ), 
                 this, SLOT( queueUpdateFinished() ) );
@@ -162,7 +177,7 @@ void Data::updateQmon()
 
 void Data::updateStats()
 {
-    QNetworkReply* r = get( "stats/" + Settings::engineer() );
+    QNetworkReply* r = get( "stats/" + Settings::engineer(), true );
     
     connect( r, SIGNAL( finished() ), 
              this, SLOT( statsUpdateFinished() ) );

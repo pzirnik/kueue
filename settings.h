@@ -52,6 +52,9 @@ class Settings
         static bool showTabsAtTop();
         static void setShowTabsAtTop( const bool& );
         
+        static bool enableSsl();
+        static void setEnableSsl( const bool& );
+        
         static bool unityEnabled();
         static void setUnityEnabled( const bool& );
         

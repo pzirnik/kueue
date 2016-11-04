@@ -110,6 +110,19 @@ void Settings::setShowTabsAtTop( const bool& b )
     settings.sync();
 }
 
+bool Settings::enableSsl()
+{
+    QSettings settings;
+    return settings.value( "enableSsl", false ).toBool();
+}
+
+void Settings::setEnableSsl( const bool& b )
+{
+    QSettings settings;
+    settings.setValue( "enableSsl", b );
+    settings.sync();
+}
+
 bool Settings::unityEnabled()
 {
     QSettings settings;

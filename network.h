@@ -38,16 +38,16 @@ class Network : public QObject
         ~Network();
         
         QNetworkAccessManager* mNAM;
-        QNetworkReply* getImpl( const QString& );
+        QNetworkReply* getImpl( const QString&, bool auth=false );
         QNetworkReply* getExtImpl( const QUrl& );
         QStringList mIPs;
         
     public:
         static Network& net();
         static void destroy();
-        static QNetworkReply* get( const QString& u )
+        static QNetworkReply* get( const QString& u, bool auth=false )
         {
-            return Network::net().getImpl( u );
+            return Network::net().getImpl( u,auth );
         }
         static QNetworkReply* getExt( const QUrl& url )
         {

@@ -112,6 +112,8 @@ ConfigDialog::ConfigDialog( QWidget *parent )
              this, SLOT( playHighNotificationSound() ) );
     connect( cfg_showSystemTray, SIGNAL( toggled( bool ) ), 
              this, SLOT( toggleSystemTray( bool ) ) );
+    connect( cfg_enableSsl, SIGNAL( toggled( bool ) ), 
+             this, SLOT( toggleSsl( bool ) ) );
     connect( cfg_monitorEnabled, SIGNAL( toggled( bool ) ),
              this, SLOT( toggleMonitor( bool ) ) );
     connect( cfg_qbossFeatures, SIGNAL( toggled( bool ) ),
@@ -181,6 +183,7 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     cfg_showAppWindow->setChecked( Settings::showAppWindow() );
     cfg_showTabsAtTop->setChecked( Settings::showTabsAtTop() );
     cfg_showSystemTray->setChecked( Settings::showSystemTray() );
+    cfg_enableSsl->setChecked( Settings::enableSsl() );
     cfg_animateQueue->setChecked( Settings::animateQueue() );
     cfg_animateQmon->setChecked( Settings::animateQmon() );
     cfg_leftMouseButton->setCurrentIndex( Settings::leftMouseButton() );
@@ -350,6 +353,7 @@ void ConfigDialog::writeSettings()
     Settings::setShowDownloadManager( cfg_showDownloadManager->isChecked() );
     Settings::setShowAppWindow( cfg_showAppWindow->isChecked() );
     Settings::setShowTabsAtTop( cfg_showTabsAtTop->isChecked() );
+    Settings::setEnableSsl( cfg_enableSsl->isChecked() );
     Settings::setUnityEnabled( cfg_unityEnabled->isChecked() );
     
     if ( cfg_otherFileManagerCommand->text() == "default" )

@@ -41,7 +41,7 @@ class Data : public QObject
     
     private:
         QPointer<QNetworkAccessManager> mNAM;
-        QNetworkReply* get( const QString& );
+        QNetworkReply* get( const QString&, bool auth=false );
         QString mDB;
         QStringList mIPs;
         QString mCurrentQueueFilter;
