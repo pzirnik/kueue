@@ -199,9 +199,13 @@ void KueueApp::createApp()
     QShortcut* dbrebuild = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_R ), mWindow );
    
     QNetworkReply* r = Network::get( "latestkueue" );
+    QNetworkReply* prod = Network::get( "productmenu" );
+    
         
     connect( r, SIGNAL( finished() ),
-             this, SLOT( updateJobDone() ) );    
+             this, SLOT( updateJobDone() ) );   
+    connect( prod, SIGNAL( finished() ),
+             this, SLOT( prodJobDone() ) );
     connect( testNotification, SIGNAL( activated() ),
              this, SLOT( sendTestNotification() ) );
     connect( newUnityTab, SIGNAL( activated() ),
@@ -254,6 +258,23 @@ void KueueApp::updateJobDone()
     {
         //Kueue::notify( "kueue-general", "Update available", "<b>New kueue version available!</b><br>Please update kueue.", "" );
     }
+}
+
+void KueueApp::prodJobDone()
+{
+    QNetworkReply* r = qobject_cast< QNetworkReply* >( sender() );
+    QString u = r->readAll();
+    QDir dir = QDir( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
+    if (u.contains("PRODUCTMENU")) {
+      QFile * xmlFile = new QFile( dir.path() + "/productmenu-server.xml" );
+      xmlFile->open(QIODevice::ReadWrite| QIODevice::Text);
+      QTextStream outstream(xmlFile);
+      outstream << u;
+      xmlFile->close();
+      QFile::remove(dir.path() + "/productmenu.xml");
+      QFile::rename(dir.path() + "/productmenu-server.xml", dir.path() + "/productmenu.xml");
+    }
+    
 }
 
 void KueueApp::createSystray()

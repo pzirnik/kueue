@@ -66,6 +66,7 @@ class KueueApp : public QObject
         void notify( QString, QString, QString, QString );
         void createApp();
         void updateJobDone();
+        void prodJobDone();
         void connectDataThread();
         void createSystray();
         void createMainWindow();
