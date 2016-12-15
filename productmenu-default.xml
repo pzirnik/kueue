@@ -1,0 +1,133 @@
+<?xml version='1.0'?>
+
+<PRODUCTMENU>
+ <menu_entry name="SUSE Linux Enterprise Server">
+   <product>SUSE Linux Enterprise Server 12 SP2</product>
+   <product>SUSE Linux Enterprise Server 12 SP1</product>
+   <product>SUSE Linux Enterprise Server 12</product>
+   <product>SUSE Linux Enterprise Live Patching 12</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Server 11 SP4</product>
+   <product>SUSE Linux Enterprise Server 11 SP3</product>
+   <product>SUSE Linux Enterprise Server 11 SP2</product>
+   <product>SUSE Linux Enterprise Server 11 SP1</product>
+   <product>SUSE Linux Enterprise Server 11</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Server 11 SP3 for VMware</product>
+   <product>SUSE Linux Enterprise Server 11 SP2 for VMware</product>
+   <product>SUSE Linux Enterprise Server 11 SP1 for VMware</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Server 10 SP4</product>
+   <product>SUSE Linux Enterprise Server 10 SP3</product>
+   <product>SUSE Linux Enterprise Server 10 SP2</product>
+   <product>SUSE Linux Enterprise Server 10 SP1</product>
+   <product>SUSE Linux Enterprise Server 10</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Server 9 SP4</product>
+   <seperator />
+ </menu_entry>
+ <menu_entry name="SUSE Linux Enterprise Desktop">
+   <product>SUSE Linux Enterprise Desktop 12 SP2</product>
+   <product>SUSE Linux Enterprise Desktop 12 SP1</product>
+   <product>SUSE Linux Enterprise Desktop 12</product>
+   <product>SUSE Linux Enterprise Workstation Extension 12</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Desktop 11 SP3</product>
+   <product>SUSE Linux Enterprise Desktop 11 SP2</product>
+   <product>SUSE Linux Enterprise Desktop 11 SP1</product>
+   <product>SUSE Linux Enterprise Desktop 11</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Desktop 10 SP4</product>
+   <product>SUSE Linux Enterprise Desktop 10 SP3</product>
+   <product>SUSE Linux Enterprise Desktop 10 SP2</product>
+   <product>SUSE Linux Enterprise Desktop 10 SP1</product>
+   <product>SUSE Linux Enterprise Desktop 10</product>
+ </menu_entry>
+ <seperator />
+ <menu_entry name="SUSE Linux Enterprise High Availability Extension">
+   <product>SUSE Linux Enterprise High Availability Extension 12</product>
+   <seperator />
+   <product>SUSE Linux Enterprise High Availability Extension 11 SP3</product>
+   <product>SUSE Linux Enterprise High Availability Extension 11 SP2</product>
+   <product>SUSE Linux Enterprise High Availability Extension 11 SP1</product>
+   <product>SUSE Linux Enterprise High Availability Extension 11</product>
+   <seperator />
+   <product>GEO Clustering for SUSE Linux Enterprise High Availability Extension 12</product>
+   <product>GEO Clustering for SUSE Linux Enterprise High Availability Extension 11 SP3</product>
+   <product>GEO Clustering for SUSE Linux Enterprise High Availability Extension 11 SP2</product>
+ </menu_entry>
+ <menu_entry name="SUSE Appliance Toolkit">
+   <product>SUSE Lifecycle Management Server 1.3</product>
+   <product>SUSE Lifecycle Management Server 1.2 [Appliance - Tools]</product>
+   <seperator />
+   <product>SUSE Studio Onsite 1.3</product>
+   <product>SUSE Studio Onsite 1.2 [Appliance - Studio]</product>
+   <seperator />
+   <product>WebYaST 1.2</product>
+   <product>WebYaST 1.1</product>
+ </menu_entry>
+ <menu_entry name="SUSE Cloud">
+   <product>SUSE OpenStack Cloud 6</product>
+   <product>SUSE Openstack Cloud 5</product>
+   <product>SUSE Cloud 2.0</product>
+   <product>SUSE Cloud 1.0</product>
+ </menu_entry>
+ <menu_entry name="Subscription Management Tool">
+   <product>Subscription Management Tool 11</product>
+   <seperator />
+   <product>Subscription Management Tool 10</product>
+ </menu_entry>
+ <menu_entry name="SUSE Manager">
+   <product>SUSE Manager 3 Server</product>
+   <seperator />
+   <product>SUSE Manager 2.1 Server</product>
+   <product>SUSE Manager 2.1 Proxy</product>
+   <seperator />
+   <product>SUSE Manager 1.7 Server</product>
+   <product>SUSE Manager 1.7 Server with Database</product>
+   <product>SUSE Manager 1.7 Proxy</product>
+   <seperator />
+   <product>SUSE Manager 1.2</product>
+   <product>SUSE Manager Proxy Server 1.2</product>
+ </menu_entry>
+ <menu_entry name="SUSE Storage">
+   <product>SUSE Enterprise Storage 3</product>
+   <seperator />
+   <product>SUSE Enterprise Storage 2.1</product>
+ </menu_entry>
+ <menu_entry name="SUSE Linux Enterprise Real Time">
+   <product>SUSE Linux Enterprise Real Time Extension 11 SP3</product>
+   <product>SUSE Linux Enterprise Real Time Extension 11 SP2</product>
+   <product>SUSE Linux Enterprise Real Time Extension 11 SP1</product>
+ </menu_entry>
+ <menu_entry name="SUSE Linux Enterprise Point of Service">
+   <product>SUSE Linux Enterprise Point of Service 11 SP3</product>
+   <product>SUSE Linux Enterprise Point of Service 11 SP2</product>
+   <product>SUSE Linux Enterprise Point of Service 11 SP1</product>
+   <product>SUSE Linux Enterprise Point of Service 11</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Point of Service 10</product>
+ </menu_entry>
+ <seperator />
+ <menu_entry name="Red Hat">
+   <product>RES 7 Expanded Support</product>
+   <product>RES 6 Expanded Support</product>
+   <product>RES 5 Expanded Support</product>
+   <seperator />
+   <product>RES 7 HA Expanded Support</product>
+   <product>RES 6 HA Expanded Support</product>
+ </menu_entry>
+ <seperator />
+ <menu_entry name="Open Enterprise Server">
+   <product>Open Enterprise Server 2015 (OES 2015) (Altair)</product>
+   <seperator />
+   <product>Open Enterprise Server 2.0.3 (OES 2 SP3)</product>
+   <seperator />
+   <product>Open Enterprise Server 11.2 (OES 11 SP2)</product>
+ </menu_entry>
+ <seperator />
+ <menu_entry name="Filr">
+   <product>Filr 1.0.1</product>
+   <product>Filr 1.0</product>
+ </menu_entry>
+</PRODUCTMENU>
