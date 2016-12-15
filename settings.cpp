@@ -123,6 +123,19 @@ void Settings::setEnableSsl( const bool& b )
     settings.sync();
 }
 
+bool Settings::autopickRecipientDisabled()
+{
+    QSettings settings;
+    return settings.value( "autopickRecipientDisabled", false ).toBool();
+}
+
+void Settings::setAutopickRecipientDisabled( const bool& b )
+{
+    QSettings settings;
+    settings.setValue( "autopickRecipientDisabled", b);
+    settings.sync();
+}
+
 bool Settings::unityEnabled()
 {
     QSettings settings;

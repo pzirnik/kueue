@@ -55,6 +55,9 @@ class Settings
         static bool enableSsl();
         static void setEnableSsl( const bool& );
         
+        static bool autopickRecipientDisabled();
+        static void setAutopickRecipientDisabled( const bool& );
+        
         static bool unityEnabled();
         static void setUnityEnabled( const bool& );
         

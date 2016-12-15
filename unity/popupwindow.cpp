@@ -408,7 +408,7 @@ void PopupWindowWebPage::pageLoaded()
         // ...and finally send the javascript to select the default recipient
         // The OK button will be activated in the next stage
         
-        mainFrame()->evaluateJavaScript( pickJS );    
+        mainFrame()->evaluateJavaScript( pickJS ); 
     }
     
     if ( mainFrame()->url().toString().contains( "https://siebelprd.innerweb.novell.com/callcentersi_enu/start.swe#SWEApplet" ) && 
@@ -416,7 +416,9 @@ void PopupWindowWebPage::pageLoaded()
     {
         // Activate the OK button 
         
-        mainFrame()->evaluateJavaScript( okJS );
+        if (!Settings::autopickRecipientDisabled()) {
+          mainFrame()->evaluateJavaScript( okJS );
+        }
         mEmailStage = 2;
     }    
     

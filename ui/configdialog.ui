@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>851</width>
-    <height>686</height>
+    <height>714</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -121,7 +121,7 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QGridLayout" name="gridLayout_24">
@@ -737,7 +737,7 @@
          </layout>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QCheckBox" name="cfg_externalEditorEnabled">
          <property name="enabled">
           <bool>true</bool>
@@ -747,7 +747,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="6" column="0">
         <widget class="QGroupBox" name="unityEditorGroupBox">
          <property name="enabled">
           <bool>false</bool>
@@ -836,7 +836,7 @@
          </layout>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="7" column="0">
         <widget class="QGroupBox" name="downloadManagerBox">
          <property name="enabled">
           <bool>true</bool>
@@ -947,7 +947,7 @@
          </layout>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="8" column="0">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -959,6 +959,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="cfg_autopickRecipientDisabled">
+         <property name="text">
+          <string>Disable autopicking of email recipient</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

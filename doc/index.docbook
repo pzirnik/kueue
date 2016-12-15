@@ -82,8 +82,11 @@
 
     <para>
         <itemizedlist>
-            <listitem><para>DB-Server defines the server for kueue to get the data from</para></listitem>
-            <listitem><para>Your login needs to be set to your innerweb/unity login</para></listitem>
+          <listitem><para>Server defines the server for kueue to get the data from</para></listitem>
+          <listitem><para>Login Your login needs to be set to your innerweb/unity login</para></listitem>
+          <listitem><para>Show tabs on top Display the tab on top of page instead of bottom</para></listitem>
+          <listitem><para>Show application window on startup Open the Kueue Main Window whenever you start Kueue</para></listitem>
+          <listitem><para>Enable SSL support Enable encryption and authentication of Data sent between Kueue server and Kueue slient</para></listitem>
         </itemizedlist>
     </para>
     
@@ -146,25 +149,12 @@
             <listitem><para>Keep download directory clean - This will automatically keep your download directory clean. If an SR is closed, it will be deleted immediately, if it is still open (ie. it changed its assignee), it will be removed after 4 days.</para></listitem>
             <listitem><para>Enable toolbar - enable the unity toolbar with all shortcuts accessible via icons</para></listitem>
             <listitem><para>Automatically extract archives - the name says it all</para></listitem>
+            <listitem><para>Disable autopicking of email recepient - do not pick a email recepient per default</para></listitem>
             <listitem><para>Enable editing with an external Editor - see the feature description in the "Unity Integration" section for details. If you'd like to use this feature, the next 2 options need to be set as well.</para></listitem>
             <listitem><para>Enable reply formatting - If checked, another option for opening in an external editor will appear (formatted, with ">" and linebreak</para></listitem>
             <listitem><para>Open download directory - select either the default filemanager or a custom filemanager to open the download directories.</para>
             <para>As an example, here is what I am using: <ulink url="scripts/kueue_yakuake">kueue_yakuake</ulink></para></listitem>
         </itemizedlist>
-    </para>
-
-  </sect1>
-  
-  <sect1 id="studioconf">
-  <title>SUSE Studio</title>
-   
-    <para>This section includes the SUSE Studio Settings</para>
-   
-    <para>
-      <screenshot><screeninfo>Studio</screeninfo>
-      <mediaobject><imageobject>
-          <imagedata fileref="config_studio.png" width="95%" format="PNG"/>
-      </imageobject></mediaobject></screenshot>
     </para>
 
   </sect1>
@@ -264,9 +254,7 @@
       <mediaobject><imageobject>
           <imagedata fileref="detailed.png" width="95%" format="PNG"/>
       </imageobject></mediaobject></screenshot>
-    </para>
-    
-    <tip><para>If the description is in a language that you don't understand, just press F1 :-)</para></tip>
+   </para>
     
 </chapter>
 
@@ -299,28 +287,6 @@
       </imageobject></mediaobject></screenshot>
     </para>
      
-</chapter>
-
-<chapter id="studio">
-<title>SUSE Studio</title>
-
-    <para>kueue can clone customer systems using SUSE Studio.</para>
-    <para>To use this feature, a SUSE Studio Onsite server with TestDrive capabilities is required.</para>
-    <para>Please set the server, username and API key in the SUSE Studio configuration module.</para>
-    
-    <para>
-      <screenshot><screeninfo>NSA</screeninfo>
-      <mediaobject><imageobject>
-          <imagedata fileref="studio.png" width="50%" format="PNG"/>
-      </imageobject></mediaobject></screenshot>
-    </para>
-    
-    <para>In the kueue menu, select "Clone system from supportconfig" as shown in the screenshot.</para>
-    <para>After the system has been built, a VNC Testdrive Tab will appear in kueue.</para>
-    <para>The root password is "linux".</para>
-    <para>You can find a copy of the supportconfig the system has been built from under /root/supportconfig</para>
-    <para>Additionally, one can find configuration files (ie. /etc) under /root/supportconfig/system</para>
-    
 </chapter>
 
 <chapter id="unity">
@@ -394,6 +360,8 @@
         </mediaobject>
       </screenshot>
     </para>
+    
+    <tip><para>Kueue try to donwload the most recent product menu definition at startup from the Kueue server. The product menu is a XML file that will be placed in the default desktop environment storage area for applications. In KDE for example this is ".local/share/data/nts/kueue" and the filename is productmenu.xml. You can customize the product menu when you place a file called "Myproductmenu.xml" in this location.</para></tip>
   
   </sect1>
   

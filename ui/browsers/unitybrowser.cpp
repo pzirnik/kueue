@@ -564,7 +564,15 @@ QMenu* UnityBrowser::productMenu( QMenu* parent )
     // provided from the server
     if (!xmlFile->open(QIODevice::ReadOnly | QIODevice::Text)) {
         xmlFile = new QFile( dir.path() + "/productmenu.xml" );
-	xmlFile->open(QIODevice::ReadOnly | QIODevice::Text);
+        if (!xmlFile->open(QIODevice::ReadOnly | QIODevice::Text)) {
+#ifdef IS_WIN32
+          xmlFile = new QFile( dir.path() +"/productmenu-default.xml" );
+#else
+          xmlFile = new QFile( "/usr/share/kueue/productmenu-default.xml" );
+#endif
+          
+          xmlFile->open(QIODevice::ReadOnly | QIODevice::Text);
+        }
     }
     QXmlStreamReader* xml = new QXmlStreamReader(xmlFile);
     QMenu* menu = new QMenu( "Set product...", parent );

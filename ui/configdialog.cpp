@@ -209,6 +209,7 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     cfg_minimumFontSize->setValue( Settings::minimumFontSize() );
     cfg_defaultFontSize->setValue( Settings::defaultFontSize() );
     cfg_externalEditorEnabled->setChecked( Settings::externalEditorEnabled() );
+    cfg_autopickRecipientDisabled->setChecked(Settings::autopickRecipientDisabled() );
     cfg_editorCommand->setText( Settings::editorCommand() );
     cfg_editorSaveLocation->setText( Settings::editorSaveLocation() );
     cfg_replyFormat->setChecked( Settings::replyFormatEnabled() );
@@ -370,6 +371,7 @@ void ConfigDialog::writeSettings()
     Settings::setMinimumFontSize( cfg_minimumFontSize->value() );
     Settings::setDefaultFontSize( cfg_defaultFontSize->value() );
     Settings::setExternalEditorEnabled( cfg_externalEditorEnabled->isChecked() );
+    Settings::setAutopickRecipientDisabled ( cfg_autopickRecipientDisabled->isChecked() );
     Settings::setEditorCommand( cfg_editorCommand->text() );
     Settings::setEditorSaveLocation( cfg_editorSaveLocation->text() );
     Settings::setReplyFormatEnabled( cfg_replyFormat->isChecked() );
