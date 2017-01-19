@@ -395,7 +395,7 @@ void DetailWindow::assignNow()
     {
         showProgress( assignCombo->currentText().toUpper() );
         
-        mAssign = Network::get( QString( "assign/" + mSr + "|" + mEngineer ) );
+        mAssign = Network::get( QString( "assign/" + mSr + "|" + mEngineer ), true );
         
         connect( mAssign, SIGNAL( finished() ), 
                  this, SLOT( assignJobDone() ) );

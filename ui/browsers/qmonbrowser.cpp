@@ -357,7 +357,7 @@ void QMonBrowser::takeSR( const QString& sr )
     {
         showProgress();
         mSR = sr;
-        mAssign = Network::get( "assign/" + sr + "|" + Settings::engineer().toUpper() );
+        mAssign = Network::get( "assign/" + sr + "|" + Settings::engineer().toUpper(), true);
         
         connect( mAssign, SIGNAL( finished() ), 
                  this, SLOT( assignFinished() ) );

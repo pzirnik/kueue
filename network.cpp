@@ -69,7 +69,7 @@ QNetworkReply* Network::getImpl( const QString& u, bool auth )
 {
     QNetworkReply* reply;
     QNetworkRequest request;
-    
+  
     
     if (Settings::enableSsl()) {
       request.setUrl("https://" + Settings::dBServer() + ":8081/" + u );
@@ -93,15 +93,13 @@ QNetworkReply* Network::getImpl( const QString& u, bool auth )
     if (auth && Settings::enableSsl()) {
        QByteArray credentials;
        credentials.append(Settings::engineer() + ":" + Settings::unityPassword());
-       credentials.toBase64();
-       request.setRawHeader( "Authorization", "Basic " + credentials );
+       request.setRawHeader( "Authorization", "Basic " + credentials.toBase64() );
     }
         
     reply = mNAM->get( request );
         
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
             this, SLOT( error( QNetworkReply::NetworkError ) ) );
-
     reply->ignoreSslErrors();
     return reply;
 }
