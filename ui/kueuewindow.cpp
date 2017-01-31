@@ -117,7 +117,7 @@ void KueueWindow::toggleWindow()
 
 void KueueWindow::closeEvent( QCloseEvent* e )
 {
-    if ( e->spontaneous() )
+    if ( e->spontaneous() && Settings::showSystemTray())
     {
         e->ignore();
         hideWindow();
