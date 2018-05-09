@@ -70,7 +70,7 @@ QNetworkReply* Network::getImpl( const QString& u, bool auth )
     QNetworkReply* reply;
     QNetworkRequest request;
   
-    
+    qDebug() << "[NETWORK]" << u;
     if (Settings::enableSsl()) {
       request.setUrl("https://" + Settings::dBServer() + ":8081/" + u );
       QSslConfiguration config = request.sslConfiguration();

@@ -731,10 +731,12 @@ QMenu* TabWidget::kueueMainMenu()
              this, SLOT( subSetShowAwaitingSupport( bool ) ) );
     connect( mActionSubOthers, SIGNAL( toggled( bool ) ),
              this, SLOT( subSetShowStatusOthers( bool ) ) );
+    
+    /* currently this is not implemented, so disable it until it is
     connect( mActionSubExpandSrTables, SIGNAL( activated() ),
              this, SLOT( subExpandAllTables() ) );
     connect( mActionSubCloseSrTables, SIGNAL( activated() ),
-             this, SLOT( subCloseAllTables() ) );
+             this, SLOT( subCloseAllTables() ) ); */
     
     connect( mActionAbout, SIGNAL( activated() ),
              this, SLOT( aboutDialog() ) );

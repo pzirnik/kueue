@@ -27,6 +27,7 @@
 #define DATA_H
 
 #include "settings.h"
+#include "kueueglobal.h"
 #include "dataclasses.h"
 
 #include <QtNetwork>
@@ -49,6 +50,7 @@ class Data : public QObject
         QString mCurrentQmonFilter;
         bool srIsClosed( const QString& );
         bool mQueueUpdateRunning;
+        KueueGlobal* mKueueGlobal;
     
     public slots:
         void updateQueueBrowser( const QString& filter = QString::Null() );

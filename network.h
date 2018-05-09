@@ -34,6 +34,7 @@ class Network : public QObject
     
     private:
         static Network* instance;
+
         Network();
         ~Network();
         

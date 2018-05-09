@@ -39,7 +39,7 @@ class TabWidget;
 class KueueApp : public QObject
 {
     Q_OBJECT
-
+    
     public:
         KueueApp();
         ~KueueApp();
@@ -76,6 +76,5 @@ class KueueApp : public QObject
         void setTabPosition();
         void openConfig();
 };
-
 
 #endif

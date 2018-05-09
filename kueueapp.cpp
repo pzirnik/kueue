@@ -46,7 +46,8 @@
 KueueApp::KueueApp()
 {
     qDebug() << "[KUEUE] Constructing";
-
+    
+    mFailedMessageDisplayed = false;
 #ifdef IS_WIN32
     char const *const path_env = getenv( "PATH" );
     QString path = "PATH=" + QCoreApplication::applicationDirPath() + "/archive/;" +
@@ -55,9 +56,16 @@ KueueApp::KueueApp()
                              path_env;
 
     putenv( path.toAscii() );
-#endif
 
-    mFailedMessageDisplayed = false;
+    /* something is wrong here, the main window does not appear
+     * on windows. I noticed it does work if the basic dialog is shown
+     * at startup, so lets fix it with flashing the basic dialog
+     * just for 20msec .... ugly, but would it be windows otherwise ? :) */
+    BasicConfig* bc = new BasicConfig();
+    QTimer::singleShot(20,bc,SLOT(hide()));
+    bc->exec();
+    delete bc;
+#endif
     
     if ( !Settings::settingsOK() )
     {
@@ -346,15 +354,6 @@ void KueueApp::openConfig()
 
 void KueueApp::settingsChanged()
 {
-    #ifndef IS_WIN32
-    #ifndef IS_OSX
-    
-        mSystray->destroy();
-        createSystray();
-    
-    #endif
-    #endif
-
     mDataThread = &mDataThread->restart();
     connectDataThread();
     

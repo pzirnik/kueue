@@ -29,6 +29,7 @@
 #include "unity/unitynetwork.h"
 #include "ui/statusbar.h"
 #include "ui/unitywidgets.h"
+#include "kueueglobal.h"
 
 #include <QWebPage>
 #include <QWebElement>
@@ -144,6 +145,7 @@ class UnityPage : public QWebPage
         QWebElement mProdElement;
         
         StatusBar* mStatusBar;
+        KueueGlobal* mKueueGlobal;
         
         NoteDialog* mNoteDialog;
         CloseDialog* mCloseDialog;
@@ -186,6 +188,7 @@ class UnityPage : public QWebPage
         bool checkMandatoryForClose();
         bool mSaveSr;
         bool mSaveAct;
+        
 
     protected:
         void javaScriptAlert( QWebFrame*, const QString& );

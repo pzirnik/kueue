@@ -72,14 +72,14 @@ void UnityBrowser::createPage( const QString& sr )
     QWebSettings::globalSettings()->setAttribute( QWebSettings::JavascriptCanAccessClipboard, true );
     
     if ( sr != QString::Null() || !sr.isEmpty() )
-    {      
+    {   
         mUnityPage = new UnityPage( this, sr );
     }
     else
     {
         mUnityPage = new UnityPage( this );
     }
-    
+   
     setPage( mUnityPage );
     
     connect( mUnityPage, SIGNAL( linkHovered( QString, QString, QString ) ), 
@@ -304,8 +304,7 @@ void UnityBrowser::mousePressEvent( QMouseEvent* event )
     {
         querySR( Kueue::getClipboard().trimmed() );
     }
-    
-    return QWebView::mousePressEvent( event );
+    QWebView::mousePressEvent( event );
 }
 
 void UnityBrowser::wheelEvent( QWheelEvent* event )

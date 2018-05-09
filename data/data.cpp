@@ -37,22 +37,10 @@ Data::Data()
 {
     qDebug() << "[DATA] Constructing, threadID" << thread()->currentThreadId();
     
+    mKueueGlobal = &mKueueGlobal->getInstance();
     mQueueUpdateRunning = false;
     mNAM = new QNetworkAccessManager( this );
- 
-    /*QHostInfo info = QHostInfo::fromName( Settings::dBServer() );
-    QList<QHostAddress> al = info.addresses();
-    
-    for ( int i = 0; i < al.size(); ++i ) 
-    { 
-        mIPs.append( al.at( i ).toString() );
-    }
-    
-    if ( mIPs.isEmpty() )
-    {
-        emit netError();
-    }*/
-    
+   
     mDB = "db-thread";
 
     QDir dir = QDir( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
@@ -101,8 +89,6 @@ Data::~Data()
 
 QNetworkReply* Data::get( const QString& u, bool auth )
 {
-    //int r = qrand() % mIPs.size();
-    //QNetworkRequest request( QUrl( "http://" + mIPs.at(r) + ":8080/" + u ) );
     QNetworkRequest request;
     
     if (Settings::enableSsl()) {
@@ -144,13 +130,12 @@ void Data::getError( QNetworkReply::NetworkError error )
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>( QObject::sender() );
     
-    reply->abort();
-    reply->close();
-    
-    //Kueue::notify( "kueue-general", "Update failed", "Failed to update your data. Networking issues or no VPN connection?", "NONE" );
-    
-    qDebug() << "[DATA] Error getting" << reply->url();
-    
+    qDebug() << "[DATA] Error getting" << reply->url() << " " <<reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toByteArray() << " " << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
+    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) == 403) {
+            mKueueGlobal->setAuthError(true);
+            qDebug() << "[DATA] Authentication error, disabling updates until next successful Unity login";
+            emit notify( "kueue-alert" , "Authentication Error" , "Queue updates disabled, check your password." , "" );
+    }
     mQueueUpdateRunning = false;
     
     reply->deleteLater();
@@ -158,35 +143,41 @@ void Data::getError( QNetworkReply::NetworkError error )
 
 void Data::updateQueue()
 {
-    if ( !mQueueUpdateRunning )
+    if ( !mQueueUpdateRunning && !mKueueGlobal->getAuthError() )
     { 
         QNetworkReply* r = get( "userqueue/full/" + Settings::engineer(), true );
     
         connect( r, SIGNAL( finished() ), 
-                this, SLOT( queueUpdateFinished() ) );
+            this, SLOT( queueUpdateFinished() ) );
     }
 }
 
 void Data::updateQmon()
 {
-    QNetworkReply* r = get( "qmon" );
+    if (!mKueueGlobal->getAuthError()) {
+        QNetworkReply* r = get( "qmon" );
     
-    connect( r, SIGNAL( finished() ), 
-             this, SLOT( qmonUpdateFinished() ) );
+        connect( r, SIGNAL( finished() ), 
+            this, SLOT( qmonUpdateFinished() ) );
+    }
 }
 
 void Data::updateStats()
 {
-    QNetworkReply* r = get( "stats/" + Settings::engineer(), true );
+    if (!mKueueGlobal->getAuthError()) {
+        QNetworkReply* r = get( "stats/" + Settings::engineer(), true );
     
-    connect( r, SIGNAL( finished() ), 
+        connect( r, SIGNAL( finished() ), 
              this, SLOT( statsUpdateFinished() ) );
+    }
 }
 
 void Data::queueUpdateFinished()
 {
     QNetworkReply* r = qobject_cast<QNetworkReply*>( sender() );
     QString xml = QString::fromUtf8( r->readAll() );
+    
+    //qDebug() << "[DATA] queueUpdateFinished: " << xml;
     
     if ( r->error() )
     {
@@ -238,6 +229,7 @@ void Data::queueUpdateFinished()
             sr.owner = list.at( i ).namedItem( "owner" ).toElement().text();
             sr.subowner = list.at( i ).namedItem( "subowner" ).toElement().text();
             sr.crsr = list.at( i ).namedItem( "crsr" ).toElement().text();
+            sr.rating = list.at( i ).namedItem( "rating" ).toElement().text();
             
             if ( sr.subowner.isEmpty() )
             {
@@ -407,6 +399,7 @@ void Data::qmonUpdateFinished()
             sr.crsr = list.at( i ).namedItem( "crsr" ).toElement().text();
             sr.hasLTSS = list.at( i ).namedItem( "ltss" ).toElement().text().toInt();
             sr.subowner = list.at( i ).namedItem( "subowner" ).toElement().text();
+            sr.rating = list.at( i ).namedItem( "rating" ).toElement().text();
             
             if ( sr.creator.isEmpty() )
             {
@@ -804,3 +797,4 @@ bool Data::srIsClosed( const QString& sr )
 }
 
 #include "data.moc"
+#include <kueueapp.h>

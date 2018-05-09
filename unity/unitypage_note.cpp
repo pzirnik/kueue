@@ -88,6 +88,11 @@ void UnityPage::addNoteFirst()
     QString id;
     QString id2;
     
+    if ( mNoteDialog->noteType() == "Collaboration Request" && mViewFrame->findFirstElement( "title" ).toInnerXml() == "Service Request Related SRs") {
+        //fake a CR we fix this back in step3
+        mIsCr=true;
+    }
+    
     if ( mIsCr )
     {
         id = "s_5_2_23";
@@ -241,6 +246,10 @@ void UnityPage::addNoteThird()
         }
     }
 
+    if ( mNoteDialog->noteType() == "Collaboration Request" && mViewFrame->findFirstElement( "title" ).toInnerXml() == "Service Request Related SRs") {
+      // we missused the CR flag in step one, change it back.
+      mIsCr==false;
+    }
     delete mNoteDialog;
     mAddNote = false;
     actionDone();

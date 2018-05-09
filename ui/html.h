@@ -59,6 +59,7 @@ class HTML
     private:
         static QString timeString( int );
         static int secDays( int );
+        static QString BgColor(const QString color);
     
 };
 

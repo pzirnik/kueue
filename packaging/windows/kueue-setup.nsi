@@ -2,8 +2,8 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "kueue"
-!define PRODUCT_PUBLISHER "Stefan Bogner"
-!define PRODUCT_WEB_SITE "http://data.kueue.tk"
+!define PRODUCT_PUBLISHER "Paul Zirnik"
+!define PRODUCT_WEB_SITE "https://github.com/pzirnik/kueue"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\kueue.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -26,6 +26,7 @@
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
 !define MUI_FINISHPAGE_RUN "$INSTDIR\kueue.exe"
+!define MUI_FINISHPAGE_TEXT "Kueue need C++ runtime redistributable 2013, make sure to install it as well. A copy of the installer has been placed at $INSTDIR\vcredist_86.exe"
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
@@ -50,7 +51,9 @@ SectionEnd
 
 Section -AdditionalIcons
   SetOutPath $INSTDIR
-  CreateShortCut "$SMPROGRAMS\kueue\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateDirectory "$SMPROGRAMS\Kueue"
+  CreateShortCut "$SMPROGRAMS\Kueue\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\Kueue\Kueue.link" "$INSTDIR\kueue.exe"
 SectionEnd
 
 Section -Post

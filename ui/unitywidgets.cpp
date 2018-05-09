@@ -161,6 +161,7 @@ NoteDialog::NoteDialog( QObject* parent, QString sr, bool isCr )
     else
     {
         titleLabel->setText( "<b>Add a note to SR#" + mSr + "</b>" );
+        noteTypeCombo->addItem( "Collaboration Request" );
     }
 }
 

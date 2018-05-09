@@ -333,7 +333,7 @@ QString HTML::SRTable( QueueSR sr )
 {
     QString srtab;
     QString t;
-    QString bg = "#E8E8E8";
+    QString bg = BgColor( sr.rating );
 
     if ( sr.id == "00000000000" )
     {
@@ -583,6 +583,14 @@ QString HTML::SRTable( QueueSR sr )
                           "</tr>" );
     }
     
+    if ( !sr.rating.isEmpty() )
+    {
+        srtab += QString( "<tr>"
+                            "<td class='gadgetText'>&nbsp;Rating</td>"
+                            "<td class='gadgetText'>" + sr.rating + "</td>"
+                          "</tr>" );
+    }
+    
     srtab += (   "</tr></table></a></a></td><td width='1' rowspan='4' class='dotlinevert'><img src='qrc:/images/spacer.gif'"
                 "width='1' height='1' border='0' alt=''></td></tr><tr><td colspan='3'><div class='dotlinehoriz'>"
                 "<img src='qrc:/images/spacer.gif' width='1' height='1' alt=''></div></td></tr></table></a><div id='abstand'></div>" );  
@@ -637,6 +645,7 @@ QString HTML::qmonTableHeader( const QString& queue, int amount )
 QString HTML::qmonSrInQueue( QmonSR sr )
 {
     QString srtab;
+    QString bg = BgColor( sr.rating );
   
     if ( sr.id == "00000000000" )
     {
@@ -655,7 +664,7 @@ QString HTML::qmonSrInQueue( QmonSR sr )
                                 "<td width='1' rowspan='4' class='dotlinevert'>\n"
                                     "<img src='qrc:/images/spacer.gif' width='1' height='1' border='0' alt=''>\n"
                                 "</td>\n"
-                                "<td width='100%' bgcolor='#E8E8E8'>\n"
+                                "<td width='100%' bgcolor='" + bg + "'>\n"
                                     "<a href='sr://" + sr.id + "'><table width='100%' cellpadding='0' cellspacing='0' border='0'>\n"
                                         "<tr width='100%'>\n"
                                             "<td class='gadgetHead' valign='center' width='18%'>\n" );
@@ -877,6 +886,14 @@ QString HTML::qmonSrInQueue( QmonSR sr )
                             "<td class='gadgetText'>&nbsp;LTSS</td>\n"
                             "<td class='gadgetText'>Yes <img src='qrc:/images/ltss.png'></img></td>\n"
                           "</tr>\n" );
+    }
+    
+    if ( !sr.rating.isEmpty() )
+    {
+        srtab += QString( "<tr>"
+                            "<td class='gadgetText'>&nbsp;Rating</td>"
+                            "<td class='gadgetText'>" + sr.rating + "</td>"
+                          "</tr>" );
     }
 
     srtab +=( "</td></tr>\n" );
@@ -1296,4 +1313,25 @@ int HTML::secDays( int sec )
     uint notNow = now - sec;
     QDateTime tmp = QDateTime::fromTime_t( notNow );
     return tmp.daysTo( QDateTime::currentDateTime() );
+}
+
+QString HTML::BgColor( QString color)
+{
+    QString bg;
+    
+    switch (color.at(0).toAscii()) {
+        case 69: bg = "#f0fff0";
+            break;
+        case 68: bg = "#d0ffd0";
+            break;
+        case 67: bg = "#b0ffb0";
+            break;
+        case 66: bg = "#90ff90";
+            break;
+        case 65: bg = "#70ff70";
+            break;
+        default: bg = "#E8E8E8";
+            break;
+    }
+    return bg;
 }

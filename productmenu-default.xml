@@ -1,7 +1,6 @@
-<?xml version='1.0'?>
-
 <PRODUCTMENU>
  <menu_entry name="SUSE Linux Enterprise Server">
+   <product>SUSE Linux Enterprise Server 12 SP3</product>
    <product>SUSE Linux Enterprise Server 12 SP2</product>
    <product>SUSE Linux Enterprise Server 12 SP1</product>
    <product>SUSE Linux Enterprise Server 12</product>
@@ -52,6 +51,7 @@
    <product>Subscription Management Tool 11</product>
  </menu_entry>
  <menu_entry name="SUSE Linux Enterprise Desktop">
+   <product>SUSE Linux Enterprise Desktop 12 SP3</product>
    <product>SUSE Linux Enterprise Desktop 12 SP2</product>
    <product>SUSE Linux Enterprise Desktop 12 SP1</product>
    <product>SUSE Linux Enterprise Desktop 12</product>
@@ -77,11 +77,12 @@
    <product>GEO Clustering for SUSE Linux Enterprise High Availability Extension 11 SP2</product>
  </menu_entry>
  <menu_entry name="SUSE Linux Enterprise for SAP">
+   <product>SUSE Linux Enterprise Server for SAP Applications 12 SP3</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 12 SP2</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 12 SP1</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 12</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 11 SP4</product>
-   <product>SUSE Linux Enterprise Server for SAP Applications 11 SP3</product>
+   <product>SUSE Linux Enterprise for SAP Applications 11 SP3</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 11 SP2</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 11 SP1</product>
  </menu_entry>
@@ -100,12 +101,19 @@
    <product>WebYaST 1.1</product>
  </menu_entry>
  <menu_entry name="SUSE Cloud">
+   <product>SUSE OpenStack Cloud 7</product>
    <product>SUSE OpenStack Cloud 6</product>
-   <product>SUSE Openstack Cloud 5</product>
+   <seperator />
    <product>SUSE Cloud 2.0</product>
    <product>SUSE Cloud 1.0</product>
  </menu_entry>
+ <menu_entry name="SUSE Container as a Service Platform">
+   <product>SUSE CaaS Platform 2</product>
+   <product>SUSE CaaS Platform 1</product>
+ </menu_entry>
  <menu_entry name="SUSE Manager">
+   <product>SUSE Manager 3.1 Server</product>
+   <seperator />
    <product>SUSE Manager 3 Server</product>
    <seperator />
    <product>SUSE Manager 2.1 Server</product>

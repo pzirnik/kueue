@@ -68,6 +68,7 @@ class QueueSR
         bool highvalue;
         bool critsit;
         bool isCr;
+        QString rating;
 };
 
 /* An SR in the queue monitor */
@@ -125,6 +126,7 @@ class QmonSR
         bool highvalue;
         bool critsit;
         bool hasLTSS;
+        QString rating;
 };
 
 /* A customer satisfaction survey */

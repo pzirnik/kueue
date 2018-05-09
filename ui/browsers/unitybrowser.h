@@ -99,7 +99,7 @@ class UnityBrowser : public QWebView
     private:
         UnityPage* mUnityPage;
         QUrl mUrl;
-
+        
         QMenu* productMenu( QMenu* parent );
         QAction* ownerAction( QString, QMenu* );
         QAction* subownerAction( QString, QMenu* );

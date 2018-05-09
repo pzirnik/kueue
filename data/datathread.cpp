@@ -133,7 +133,9 @@ void DataThread::deleteData()
     // proper solution at some point, but for now this is good enough.
     
     #ifndef IS_OSX
+    #ifndef IS_WIN32
     delete mData;
+    #endif
     #endif
 }
 

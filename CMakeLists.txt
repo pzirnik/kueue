@@ -93,6 +93,7 @@ INCLUDE_DIRECTORIES( ${ArchiveExtract_INCLUDE_DIR} )
 SET( kueue_CPP  main.cpp
                 kueueapp.cpp
 		kueuethreads.cpp
+		kueueglobal.cpp
                 settings.cpp
                 network.cpp
 

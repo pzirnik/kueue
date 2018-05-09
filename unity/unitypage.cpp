@@ -69,6 +69,7 @@ UnityPage::UnityPage( QObject* parent, QString sr )
     mSetSubowner = false;
     
     mStatusBar = &mStatusBar->getInstance();
+    mKueueGlobal = &mKueueGlobal->getInstance();
     
     mNAM = new UnityNetwork( this );
     setNetworkAccessManager( mNAM );    
@@ -319,6 +320,12 @@ void UnityPage::pageLoaded()
 
             wu.setInnerXml( text );
         }
+        /*if ( title.isEmpty() ) {
+            QWebElement textarea = mViewFrame->findFirstElement( "*#s_2_1_17_0");
+            if (!textarea.isNull()) {
+                textarea.setAttribute( "maxlength", "15000" );
+            }
+        }*/
     }
     else if ( mainFrame()->url().toString() == "about:blank" )
     {
@@ -649,6 +656,7 @@ void UnityPage::getServiceJS()
             
             mServiceJS = fc.at( i ).attribute( "href" ).remove( "Javascript:" );
             mNavReady = true;
+            mKueueGlobal->setAuthError(false);
         }
     }
 }

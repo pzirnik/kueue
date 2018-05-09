@@ -263,7 +263,7 @@ void Systray::notify( const QString& type, QString title, QString body, const QS
         {
             if ( Settings::generalNotificationPopup() )
             {
-                #ifdef QT_HAS_DBUS    
+                #ifdef QT_HAS_DBUS
                 
                     bool queued = QDBusConnection::sessionBus().send( m );
                 
@@ -278,6 +278,33 @@ void Systray::notify( const QString& type, QString title, QString body, const QS
             {
                 Kueue::playSound( Settings::generalNotificationSoundFile() );
             }
+        }
+        else if ( type == "kueue-alert" )
+        {   
+            #ifdef QT_HAS_DBUS
+            
+                QStringList actions;
+                QList<QVariant> args;
+                
+                actions = QStringList() << "cl|" << "Close";
+                args.append( "kueue" );
+                args.append( 0U );
+                args.append( "kueue" );
+                args.append( title );
+                args.append( body );
+                args.append( actions );
+                args.append( QVariantMap() );
+                args.append( 0 );
+                QDBusMessage m = QDBusMessage::createMethodCall( dbusServiceName, dbusPath, dbusInterfaceName, "Notify" );
+                m.setArguments( args );
+                bool queued = QDBusConnection::sessionBus().send( m );
+                
+            #else
+                
+                showMessage( title, body, QSystemTrayIcon::Information, 0 );
+                
+            #endif
+                
         }
         else if ( type == "kueue-sr-new" )
         {
@@ -464,18 +491,17 @@ void Systray::notificationActionInvoked( uint id, QString type )
     if ( type.startsWith( "det|" ) )
     {
         Kueue::showDetailedDescription( type.remove( "det|" ) );
-        requiresAttention( false );
     }
     else if ( type.startsWith( "un|" ) )
     {
         TabWidget::newUnityWithSR( type.remove( "un|" ) );
-        requiresAttention( false );
     }
     else if ( type.startsWith( "cl|" ) )
     {
         closeNotification( id );
-        requiresAttention( false );
     }
+    requiresAttention( false );
+    
 }
 
 void Systray::closeNotification( uint id )
@@ -485,7 +511,7 @@ void Systray::closeNotification( uint id )
         QList<QVariant> args;
         args.append( id );
 
-        QDBusMessage m = QDBusMessage::createMethodCall( dbusServiceName, dbusPath, dbusInterfaceName, "closeNotification" );
+        QDBusMessage m = QDBusMessage::createMethodCall( dbusServiceName, dbusPath, dbusInterfaceName, "CloseNotification" );
         m.setArguments( args );
         
         QDBusConnection::sessionBus().send( m );
