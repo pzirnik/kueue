@@ -69,6 +69,8 @@ DetailWindow::DetailWindow( QString id, bool nb )
         contractLabel1->setVisible( false );
         hvLabel->setVisible( false );
         hvLabel1->setVisible( false );
+        ratingLabel->setVisible( false );
+        ratingLabel1->setVisible( false );
         customerLabel->setTextInteractionFlags( Qt::TextSelectableByMouse );
         briefDescLabel->setTextInteractionFlags( Qt::TextSelectableByMouse );
         statusLabel->setTextInteractionFlags( Qt::TextSelectableByMouse );
@@ -191,23 +193,24 @@ void DetailWindow::fillDetails( QueueSR sr )
             customerLabel->setText( sr.cus_account );
         }
         
-        statusLabel->setText( sr.status );
+    statusLabel->setText( sr.status );
   
-        contactLabel->setText( sr.cus_firstname + " " + sr.cus_lastname + " (" + sr.cus_lang + ")" );
+    contactLabel->setText( sr.cus_firstname + " " + sr.cus_lastname + " (" + sr.cus_lang + ")" );
         
-        QString mailto = "mailto:" + QUrl::toPercentEncoding( sr.cus_email ) + "?cc=techsup@novell.com&subject=SR" + QUrl::toPercentEncoding( " " + sr.id + " - " + sr.bdesc )
-                         + "&body=" + QUrl::toPercentEncoding( sr.cus_firstname + " " + sr.cus_lastname );
+    QString mailto = "mailto:" + QUrl::toPercentEncoding( sr.cus_email ) + "?cc=techsup@novell.com&subject=SR" + QUrl::toPercentEncoding( " " + sr.id + " - " + sr.bdesc )
+                     + "&body=" + QUrl::toPercentEncoding( sr.cus_firstname + " " + sr.cus_lastname );
                 
-        contactEmailLabel->setTextInteractionFlags( Qt::LinksAccessibleByMouse | Qt::TextSelectableByMouse );
+    contactEmailLabel->setTextInteractionFlags( Qt::LinksAccessibleByMouse | Qt::TextSelectableByMouse );
+      
+    contactEmailLabel->setOpenExternalLinks( true );
+    contactEmailLabel->setText( "<a href=" + mailto + ">" + sr.cus_email + "</a>" );
+    contactPhoneLabel->setText( sr.cus_phone );
         
-        contactEmailLabel->setOpenExternalLinks( true );
-        contactEmailLabel->setText( "<a href=" + mailto + ">" + sr.cus_email + "</a>" );
-        contactPhoneLabel->setText( sr.cus_phone );
-        
-        ageLabel->setText( QString::number( sr.age ) + " days" );
-        lastUpdateLabel->setText( QString::number( sr.lastUpdateDays ) + " days ago" );
-        hvLabel->setText( "No / No" );
-        contractLabel->setText( sr.contract );
+    ageLabel->setText( QString::number( sr.age ) + " days" );
+    lastUpdateLabel->setText( QString::number( sr.lastUpdateDays ) + " days ago" );
+    hvLabel->setText( "No / No" );
+    contractLabel->setText( sr.contract );
+    ratingLabel->setText( sr.rating );
 }
 
 void DetailWindow::closeEvent( QCloseEvent* e )
@@ -276,6 +279,7 @@ void DetailWindow::detailFinished()
         sr.service_level = node.namedItem( "service_level" ).toElement().text().toInt();
         sr.highvalue = node.namedItem( "highvalue" ).toElement().text().toInt(); 
         sr.critsit = node.namedItem( "critsit" ).toElement().text().toInt();
+        sr.rating = node.namedItem( "rating" ).toElement().text();
         
         QDateTime a = QDateTime::fromString( sr.created, "yyyy-MM-dd hh:mm:ss" );
         QDateTime u = QDateTime::fromString( sr.lastupdate, "yyyy-MM-dd hh:mm:ss" );
@@ -471,6 +475,8 @@ void DetailWindow::toggleMoreDetails()
         hvLabel1->setVisible( false );
         contractLabel->setVisible( false );
         contractLabel1->setVisible( false );
+        ratingLabel->setVisible( false );
+        ratingLabel1->setVisible( false );
         moreDetailButton->setIcon( QIcon( ":/icons/menus/add.png" ).pixmap( QSize( 16, 16 ) ) );
         mDetailed = false;
     }
@@ -495,6 +501,8 @@ void DetailWindow::toggleMoreDetails()
         ageLabel1->setVisible( true );
         lastUpdateLabel->setVisible( true );
         lastUpdateLabel1->setVisible( true );
+        ratingLabel->setVisible( true );
+        ratingLabel1->setVisible( true );
         moreDetailButton->setIcon( QIcon( ":/icons/menus/remove.png" ).pixmap( QSize( 16, 16 ) ) );
         mDetailed = true;
     }

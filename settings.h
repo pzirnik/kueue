@@ -393,6 +393,24 @@ class Settings
         
         static QString nsaVersion();
         static void setNsaVersion( const QString& );
+        
+        static QString ratingAcol();
+        static void setratingAcol( const QColor& );
+        
+        static QString ratingBcol();
+        static void setratingBcol( const QColor& );
+        
+        static QString ratingCcol();
+        static void setratingCcol( const QColor& );
+        
+        static QString ratingDcol();
+        static void setratingDcol( const QColor& );
+        
+        static QString ratingEcol();
+        static void setratingEcol( const QColor& );
+        
+        static QString ratingFcol();
+        static void setratingFcol( const QColor& );
 };    
 
 #endif

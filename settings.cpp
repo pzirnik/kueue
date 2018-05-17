@@ -29,6 +29,7 @@
 #include <QDebug>
 #include <QStringList>
 #include <QDir>
+#include <QColor>
 
 QString Settings::dBServer()
 {
@@ -1524,7 +1525,7 @@ QByteArray Settings::nsaWinState()
 void Settings::setNsaWinState( const QByteArray& s )
 {
     QSettings settings;
-    settings.setValue( "detWinState", s );
+    settings.setValue( "nsaWinState", s );
     settings.sync();
 }
 
@@ -1538,5 +1539,113 @@ void Settings::setNsaVersion( const QString& s )
 {
     QSettings settings;
     settings.setValue( "nsaVersion", s );
+    settings.sync();
+}
+
+QString Settings::ratingAcol()
+{
+    QSettings settings;
+    QString color;
+    color = settings.value( "ratingAcol" ).toString();
+    if ( color.isEmpty() ) {
+        return ( "#70ff70");
+    }
+    return color;
+}
+
+void Settings::setratingAcol( const QColor& color )
+{
+    QSettings settings;
+    settings.setValue( "ratingAcol", color.name() );
+    settings.sync();
+}
+
+QString Settings::ratingBcol()
+{
+    QSettings settings;
+    QString color;
+    color = settings.value( "ratingBcol" ).toString();
+    if ( color.isEmpty() ) {
+        return ( "#90ff90");
+    }
+    return color;
+}
+
+void Settings::setratingBcol( const QColor& color )
+{
+    QSettings settings;
+    settings.setValue( "ratingBcol", color.name() );
+    settings.sync();
+}
+
+QString Settings::ratingCcol()
+{
+    QSettings settings;
+    QString color;
+    color = settings.value( "ratingCcol" ).toString();
+    if ( color.isEmpty() ) {
+        return ( "#b0ffb0");
+    }
+    return color;
+}
+
+void Settings::setratingCcol( const QColor& color )
+{
+    QSettings settings;
+    settings.setValue( "ratingCcol", color.name() );
+    settings.sync();
+}
+
+QString Settings::ratingDcol()
+{
+    QSettings settings;
+    QString color;
+    color = settings.value( "ratingDcol" ).toString();
+    if ( color.isEmpty() ) {
+        return ( "#d0ffd0");
+    }
+    return color;
+}
+
+void Settings::setratingDcol( const QColor& color )
+{
+    QSettings settings;
+    settings.setValue( "ratingDcol", color.name() );
+    settings.sync();
+}
+
+QString Settings::ratingEcol()
+{
+    QSettings settings;
+    QString color;
+    color = settings.value( "ratingEcol" ).toString();
+    if ( color.isEmpty() ) {
+        return ( "#f0fff0");
+    }
+    return color;
+}
+
+void Settings::setratingEcol( const QColor& color )
+{
+    QSettings settings;
+    settings.setValue( "ratingEcol", color.name() );
+    settings.sync();
+}
+
+QString Settings::ratingFcol()
+{
+    QSettings settings;
+    QString color;
+    color = settings.value( "ratingFcol" ).toString();
+    if ( color.isEmpty() ) {
+        return ( "#E8E8E8");
+    }
+    return color;
+}
+
+void Settings::setratingFcol( const QColor& color )
+{
+    QSettings settings;
+    settings.setValue( "ratingFcol", color.name() );
     settings.sync();
 }

@@ -1320,17 +1320,17 @@ QString HTML::BgColor( QString color)
     QString bg;
     
     switch (color.at(0).toAscii()) {
-        case 69: bg = "#f0fff0";
+        case 69: bg = Settings::ratingEcol();
             break;
-        case 68: bg = "#d0ffd0";
+        case 68: bg = Settings::ratingDcol();
             break;
-        case 67: bg = "#b0ffb0";
+        case 67: bg = Settings::ratingCcol();
             break;
-        case 66: bg = "#90ff90";
+        case 66: bg = Settings::ratingBcol();
             break;
-        case 65: bg = "#70ff70";
+        case 65: bg = Settings::ratingAcol();
             break;
-        default: bg = "#E8E8E8";
+        default: bg = Settings::ratingFcol();
             break;
     }
     return bg;

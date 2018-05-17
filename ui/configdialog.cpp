@@ -33,6 +33,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QFileDialog>
+#include <QColorDialog>
 
 ConfigDialog::ConfigDialog( QWidget *parent )
             : Ui_ConfigDialog()
@@ -175,6 +176,19 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     connect( cfg_highNotificationSound, SIGNAL( toggled( bool ) ), 
              highNotificationPlayButton, SLOT( setEnabled( bool ) ) );
     
+    connect( ratingAbutton, SIGNAL( clicked() ),
+             this, SLOT( changeButtonAColor() ) );
+    connect( ratingBbutton, SIGNAL( clicked() ),
+             this, SLOT( changeButtonBColor() ) );
+    connect( ratingCbutton, SIGNAL( clicked() ),
+             this, SLOT( changeButtonCColor() ) );
+    connect( ratingDbutton, SIGNAL( clicked() ),
+             this, SLOT( changeButtonDColor() ) );    
+    connect( ratingEbutton, SIGNAL( clicked() ),
+             this, SLOT( changeButtonEColor() ) );
+    connect( ratingFbutton, SIGNAL( clicked() ),
+             this, SLOT( changeButtonFColor() ) );   
+    
     cfg_dBServer->setText( Settings::dBServer() );
     cfg_engineer->setText( Settings::engineer() );
     
@@ -286,6 +300,49 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     cfg_highNotificationSoundFile->setEnabled( Settings::highNotificationSound() );
     highNotificationSoundButton->setEnabled( Settings::highNotificationSound() );
     highNotificationPlayButton->setEnabled( Settings::highNotificationSound() );
+    
+    QString Scolor;
+    Scolor=Settings::ratingAcol();
+    ratingAcol.setNamedColor( Scolor );
+    if ( !ratingAcol.isValid() ) {
+        ratingAcol.setNamedColor( "#70ff70" );
+    }
+    setButtonAColor( ratingAcol );
+    
+    Scolor=Settings::ratingBcol();
+    ratingBcol.setNamedColor( Scolor );
+    if ( !ratingBcol.isValid() ) {
+        ratingBcol.setNamedColor( "#90ff90" );
+    }
+    setButtonBColor( ratingBcol );
+    
+    Scolor=Settings::ratingCcol();
+    ratingCcol.setNamedColor( Scolor );
+    if ( !ratingCcol.isValid() ) {
+        ratingCcol.setNamedColor( "#b0ffb0" );
+    }
+    setButtonCColor( ratingCcol );
+    
+    Scolor=Settings::ratingDcol();
+    ratingDcol.setNamedColor( Scolor );
+    if ( !ratingDcol.isValid() ) {
+        ratingDcol.setNamedColor( "#d0ffd0" );
+    }
+    setButtonDColor( ratingDcol );
+    
+    Scolor=Settings::ratingEcol();
+    ratingEcol.setNamedColor( Scolor );
+    if ( !ratingEcol.isValid() ) {
+        ratingEcol.setNamedColor( "#f0fff0" );
+    }
+    setButtonEColor( ratingEcol );
+    
+    Scolor=Settings::ratingFcol();
+    ratingFcol.setNamedColor( Scolor );
+    if ( !ratingFcol.isValid() ) {
+        ratingFcol.setNamedColor( "#E8E8E8" );
+    }
+    setButtonFColor( ratingFcol );
     
     toggleSystemTray( Settings::showSystemTray() );
     toggleMonitor( Settings::monitorEnabled() );
@@ -448,6 +505,12 @@ void ConfigDialog::writeSettings()
     Settings::setHighNotificationPopup( cfg_highNotificationPopup->isChecked() );
     Settings::setHighNotificationSound( cfg_highNotificationSound->isChecked() );
     Settings::setHighNotificationSoundFile( cfg_highNotificationSoundFile->text() );
+    Settings::setratingAcol( ratingAcol );
+    Settings::setratingBcol( ratingBcol );
+    Settings::setratingCcol( ratingCcol );
+    Settings::setratingDcol( ratingDcol );
+    Settings::setratingEcol( ratingEcol );
+    Settings::setratingFcol( ratingFcol );
     
     emit settingsChanged();
 }
@@ -716,6 +779,102 @@ void ConfigDialog::getFilemanagerCommand()
     {
         cfg_otherFileManagerCommand->setText( fileName );
     }
+}
+
+void ConfigDialog::changeButtonAColor()
+{
+    QColor newColor = QColorDialog::getColor( ratingAcol, parentWidget() );
+    if ( newColor.isValid() && newColor != ratingAcol ) {
+        setButtonAColor( newColor );
+    }
+    ratingAbutton->clearFocus();
+}
+
+void ConfigDialog::setButtonAColor( const QColor& color ) {
+    QPalette pal = ratingAbutton->palette();
+    pal.setColor(QPalette::Button, color);
+    ratingAbutton->setPalette(pal);
+    ratingAcol = color;
+}
+
+void ConfigDialog::changeButtonBColor()
+{
+    QColor newColor = QColorDialog::getColor( ratingBcol, parentWidget() );
+    if ( newColor.isValid() && newColor != ratingBcol ) {
+        setButtonBColor( newColor );
+    }
+    ratingBbutton->clearFocus();
+}
+
+void ConfigDialog::setButtonBColor( const QColor& color ) {
+    QPalette pal = ratingBbutton->palette();
+    pal.setColor(QPalette::Button, color);
+    ratingBbutton->setPalette(pal);
+    ratingBcol = color;
+}
+
+void ConfigDialog::changeButtonCColor()
+{
+    QColor newColor = QColorDialog::getColor( ratingCcol, parentWidget() );
+    if ( newColor.isValid() && newColor != ratingCcol ) {
+        setButtonCColor( newColor );
+    }
+    ratingCbutton->clearFocus();
+}
+
+void ConfigDialog::setButtonCColor( const QColor& color ) {
+    QPalette pal = ratingCbutton->palette();
+    pal.setColor(QPalette::Button, color);
+    ratingCbutton->setPalette(pal);
+    ratingCcol = color;
+}
+
+void ConfigDialog::changeButtonDColor()
+{
+    QColor newColor = QColorDialog::getColor( ratingDcol, parentWidget() );
+    if ( newColor.isValid() && newColor != ratingDcol ) {
+        setButtonDColor( newColor );
+    }
+    ratingDbutton->clearFocus();
+}
+
+void ConfigDialog::setButtonDColor( const QColor& color ) {
+    QPalette pal = ratingDbutton->palette();
+    pal.setColor(QPalette::Button, color);
+    ratingDbutton->setPalette(pal);
+    ratingDcol = color;
+}
+
+void ConfigDialog::changeButtonEColor()
+{
+    QColor newColor = QColorDialog::getColor( ratingEcol, parentWidget() );
+    if ( newColor.isValid() && newColor != ratingEcol ) {
+        setButtonEColor( newColor );
+    }
+    ratingEbutton->clearFocus();
+}
+
+void ConfigDialog::setButtonEColor( const QColor& color ) {
+    QPalette pal = ratingEbutton->palette();
+    pal.setColor(QPalette::Button, color);
+    ratingEbutton->setPalette(pal);
+    ratingEcol = color;
+}
+
+void ConfigDialog::changeButtonFColor()
+{
+    QColor newColor = QColorDialog::getColor( ratingFcol, parentWidget() );
+    if ( newColor.isValid() && newColor != ratingFcol ) {
+        setButtonFColor( newColor );
+    }
+    ratingFbutton->clearFocus();
+}
+
+void ConfigDialog::setButtonFColor( const QColor& color ) {
+    QPalette pal = ratingFbutton->palette();
+    pal.setColor(QPalette::Button, color);
+    ratingFbutton->setPalette(pal);
+    ratingFcol = color;
 }
 
 BasicConfig::BasicConfig()

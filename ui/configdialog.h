@@ -32,7 +32,6 @@
 #include <QNetworkReply>
 #include <QMessageBox>
 
-
 class ConfigDialog : public QDialog, private Ui_ConfigDialog
 {
     Q_OBJECT
@@ -44,6 +43,12 @@ class ConfigDialog : public QDialog, private Ui_ConfigDialog
             
     private:
         QNetworkReply* mQueueReply;
+        QColor ratingAcol;
+        QColor ratingBcol;
+        QColor ratingCcol;
+        QColor ratingDcol;
+        QColor ratingEcol;
+        QColor ratingFcol;
             
     private slots:
         void writeSettings();
@@ -97,9 +102,22 @@ class ConfigDialog : public QDialog, private Ui_ConfigDialog
         void getExternalEditorFile();
         void getEditorSaveLocation();
         void getFilemanagerCommand();
+        void setButtonAColor( const QColor& color );
+        void changeButtonAColor();
+        void setButtonBColor( const QColor& color );
+        void changeButtonBColor();
+        void setButtonCColor( const QColor& color );
+        void changeButtonCColor();
+        void setButtonDColor( const QColor& color );
+        void changeButtonDColor();
+        void setButtonEColor( const QColor& color );
+        void changeButtonEColor();
+        void setButtonFColor( const QColor& color );
+        void changeButtonFColor();     
         
     signals:
-        void settingsChanged();  
+        void settingsChanged();
+
 };
 
 class BasicConfig : public QDialog, private Ui::BasicConfig
