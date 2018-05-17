@@ -301,6 +301,20 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     highNotificationSoundButton->setEnabled( Settings::highNotificationSound() );
     highNotificationPlayButton->setEnabled( Settings::highNotificationSound() );
     
+    
+    ratingAbutton->setAutoFillBackground(true);
+    ratingAbutton->setFlat(true);
+    ratingBbutton->setAutoFillBackground(true);
+    ratingBbutton->setFlat(true);
+    ratingCbutton->setAutoFillBackground(true);
+    ratingCbutton->setFlat(true);
+    ratingDbutton->setAutoFillBackground(true);
+    ratingDbutton->setFlat(true);
+    ratingEbutton->setAutoFillBackground(true);
+    ratingEbutton->setFlat(true);
+    ratingFbutton->setAutoFillBackground(true);
+    ratingFbutton->setFlat(true);
+    
     QString Scolor;
     Scolor=Settings::ratingAcol();
     ratingAcol.setNamedColor( Scolor );
