@@ -977,9 +977,10 @@ void TabWidget::subSetShowStatusOthers( bool s )
 void TabWidget::aboutDialog()
 {
     QMessageBox::about( this, "About", "<b>kueue " + QApplication::applicationVersion() + 
-                              "</b><br>(C) 2011 - " + QDate::currentDate().year() + " <a href='mailto:paul.zirnik@suse.com>Paul Zirnik</a></br>"
-                              "Stefan Bogner<br></br>"
-                              "</br>Have a lot of fun :-)" );
+                              "</b><br>(C) 2011 - " + QString::number(QDate::currentDate().year()) + 
+                              " <a href='mailto:paul.zirnik@suse.com'>Paul Zirnik</a>,"
+                              "Stefan Bogner<br>"
+                              "<br>Have a lot of fun :-)" );
 }
 
 void TabWidget::reportBug()
