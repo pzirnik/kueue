@@ -3,7 +3,7 @@ Section: Qt
 Priority: optional
 Maintainer: Christian Kornacker <ckornacker@suse.com>
 Build-Depends: debhelper (>= 7.0.50~), cmake (>= 2.6~), libphonon-dev, libqt4-dev, libqtwebkit-dev
-Standards-Version: git 
+Standards-Version: 5.6.2 
 Homepage: http://kueue.tk
 
 Package: kueue

@@ -1,5 +1,5 @@
 #
-# spec file for package kueue (Version git)
+# spec file for package kueue (Version 5.6.2)
 #
 # Copyright 2011 Stefan Bogner <sbogner@suse.com>
 #
@@ -23,7 +23,7 @@ BuildRequires:      libqt4-devel cmake update-desktop-files libQtWebKit-devel xd
 
 Name:               kueue
 Summary:            Queue-Manager
-Version:            git
+Version:            5.6.2
 Release:            1
 License:            GPL
 Group:              System/GUI/Qt
