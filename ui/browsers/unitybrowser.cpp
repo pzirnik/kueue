@@ -350,6 +350,7 @@ void UnityBrowser::contextMenu( QMouseEvent* event, const QString& id )
         QAction* nsa = new QAction( "Save NSA Report", menu );
         QAction* dlimg = new QAction( "Save image...", menu );
         QAction* bz = new QAction( "Open in bugzilla...", menu );
+        QAction* tid = new QAction( "Open TID ...", menu );
         
         QWidgetAction* wa = new QWidgetAction( menu );
         
@@ -376,6 +377,9 @@ void UnityBrowser::contextMenu( QMouseEvent* event, const QString& id )
         
         connect( bz, SIGNAL( triggered(bool) ), 
                 this, SLOT( openInBugzilla() ) );
+        
+        connect( tid, SIGNAL( triggered(bool) ),
+                this, SLOT( openTidInBrowser() ) );
         
         QFont font = head->font();
         font.setBold( true );
@@ -472,6 +476,12 @@ void UnityBrowser::contextMenu( QMouseEvent* event, const QString& id )
         {
             bz->setData( element.attribute( "value" ) );
             menu->addAction( bz );
+        }
+        
+        if ( ( isTidField( element ) ) && ( !element.attribute( "value" ).isEmpty() ) )
+        {
+            tid->setData( element.attribute( "value" ) );
+            menu->addAction( tid );
         }
         
         QMenu* ownermenu = new QMenu( menu );
@@ -745,6 +755,19 @@ bool UnityBrowser::isBugzillaField( QWebElement element )
     }
 }
 
+bool UnityBrowser::isTidField( QWebElement element )
+{
+    if ( ( element.attribute( "tabindex" ) == "1037" ) &&
+         ( element.attribute( "onchange" ).startsWith( "trackChange" ) ) )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 bool UnityBrowser::isEngineerField( QWebElement element )
 {
     if ( ( element.attribute( "tabindex" ) == "1028" ) && 
@@ -762,6 +785,12 @@ void UnityBrowser::openInBugzilla()
 {
     QAction* a = qobject_cast< QAction* >( sender() );
     QDesktopServices::openUrl( "https://bugzilla.suse.com/show_bug.cgi?id=" + a->data().toString() );
+}
+
+void UnityBrowser::openTidInBrowser()
+{
+    QAction* a = qobject_cast< QAction* >( sender() );
+    QDesktopServices::openUrl( "https://www.suse.com/support/kb/doc/?id=" + a->data().toString() );
 }
 
 QWebPage* UnityBrowser::newWindow()

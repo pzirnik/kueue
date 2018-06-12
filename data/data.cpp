@@ -308,7 +308,7 @@ void Data::queueUpdateFinished()
                     }
                     else
                     {
-                        if ( Database::getGoneDays( sr, mDB ) > 3 )
+                        if ( Database::getGoneDays( sr, mDB ) >= 3 )
                         {
                             Database::delGoneSR( sr, mDB );
                             deleteList.append( Settings::downloadDirectory() + "/" + sr );

@@ -83,6 +83,7 @@ class UnityBrowser : public QWebView
         void openSearch();
         void fillOutProduct();
         void openInBugzilla();
+        void openTidInBrowser();
         void processFinished();
         void setPopupHidden();
         void applyZoom();
@@ -107,6 +108,7 @@ class UnityBrowser : public QWebView
         bool isProductField( QWebElement );
         bool isBugzillaField( QWebElement );
         bool isEngineerField( QWebElement );
+        bool isTidField( QWebElement );
         bool mShowPopup;
         
         int mCurrentZoom;
