@@ -109,6 +109,9 @@ class Settings
         static QString downloadDirectory();
         static void setDownloadDirectory( const QString& );
         
+        static QString EmailTemplate();
+        static void setEmailTemplate( const QString& );
+        
         static bool useSrDirectory();
         static void setUseSrDirectory( const bool& );
                 

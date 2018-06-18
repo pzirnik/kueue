@@ -929,10 +929,10 @@ QString HTML::statsPageHeader( Statz s )
                    "<img src='qrc:/images/logo_im_end.gif' width='12' height='80' border='0'></div></div>"
                    "<div id='content'>" );
     
-    /*if ( sl.isEmpty() || cl.isEmpty() )
+    if ( sl.isEmpty() || cl.isEmpty() )
     {
-        return ph + "Updating...";
-    }*/
+        return ph + "Updating... come back in 30 minutes ...";
+    }
 
     ph += csatTableHeader( s.csatRtsPercent, s.csatEngAvg, s.csatSrAvg, nr );
     

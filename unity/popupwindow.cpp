@@ -365,6 +365,7 @@ PopupWindowWebPage::PopupWindowWebPage( QObject* parent ) : QWebPage( parent )
 PopupWindowWebPage::~PopupWindowWebPage()
 {
     qDebug() << "[POPUPWINDOWWEBPAGE Destroying";
+    mEmailStage = 0;
 }
 
 QWebPage* PopupWindowWebPage::createWindow( QWebPage::WebWindowType type )
@@ -423,45 +424,48 @@ void PopupWindowWebPage::pageLoaded()
     }    
     
     else if ( mainFrame()->url().toString().contains( "https://siebelprd.innerweb.novell.com/callcentersi_enu/start.swe#SWEApplet" ) && 
-       ( mEmailStage == 2 ) )
-    {    
-        // First, reset the mEmailStage as we are in the final stage now
+       ( mEmailStage >= 2 ) )
+    {         
+        bool found=false;
+        QString defaultJS;
+        QWebElement select_body;
+        QWebElementCollection options_body;      
         
-        mEmailStage = 0;
-        //QString defaultJS;
+        // Webpage Email Window Ids are different between SR/CR
+        // SRid=s_5_1_149_1 CRid=s_7_1_149_1
+        // also the number after "s_" does change if you close the
+        // popup and open it again ... WTF ... so we need to match like "s_.*_1_149_1"
         
-        // Find all "select" and "option" elements on the email page
-        
-        /*QWebElementCollection c = mainFrame()->findAllElements( "select" );
-        QWebElementCollection d = mainFrame()->findAllElements( "option" );
-        
-        for ( int i = 0; i < c.count(); ++i )
+        select_body = mainFrame()->findFirstElement( "select[id^='s_'][id$='_1_149_1']" );
+
+        // select the default template and update the default template if the
+        // users does change it.
+        if (!select_body.attribute( "onchange" ).isEmpty())
         {
-            // Get the javascript for the onchange attribute of the combobox
-            // This is required to set the default response 
-            
-            if ( c.at(i).attribute( "id" ).contains( "s_4_1_177_11" ) )
+            defaultJS = select_body.attribute( "onchange" );
+            options_body = select_body.findAll( "option");
+            for ( int i = 0; i < options_body.count(); i++ )
             {
-                defaultJS = c.at(i).attribute( "onchange" );
+                if (options_body.at(i).hasAttribute( "selected"))
+                {
+                    Settings::setEmailTemplate(options_body.at(i).attribute( "value" ));
+                    break;
+                }
+                if (options_body.at(i).attribute( "value" ).contains( Settings::EmailTemplate() ))
+                {
+                    options_body.at(i).setAttribute( "selected", "Yes");
+                    found=true;
+                }
+            }
+            // only when we run the first time trigger the javascript
+            // to change the body template
+            if ( mEmailStage == 2 && found)
+            {
+                mEmailStage = 3;
+                mainFrame()->evaluateJavaScript( defaultJS );
             }
         }
-        
-        for ( int i = 0; i < d.count(); ++i )
-        {
-            // Set the combobox to the default response 
-            
-            if ( d.at( i ).attribute( "value" ).contains( Settings::defaultEmailTemplate() ) )
-            {
-                d.at( i ).setAttribute( "selected", "Yes" );
-            }
-        }
-        
-        // ... and execute the onchange javascript to make it active
-        // The email window will now display the default response template
-        
-        mainFrame()->evaluateJavaScript( defaultJS );
-	    } */
-	}
+    }
 }
 
 static bool contentSniff( const QByteArray &data )

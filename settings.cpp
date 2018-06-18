@@ -137,6 +137,19 @@ void Settings::setAutopickRecipientDisabled( const bool& b )
     settings.sync();
 }
 
+QString Settings::EmailTemplate()
+{
+    QSettings settings;
+    return settings.value( "EmailTemplate").toString();
+}
+
+void Settings::setEmailTemplate( const QString& Template)
+{
+    QSettings settings;
+    settings.setValue( "EmailTemplate", Template);
+    settings.sync();
+}
+
 bool Settings::unityEnabled()
 {
     QSettings settings;
