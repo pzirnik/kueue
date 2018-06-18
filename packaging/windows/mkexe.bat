@@ -71,7 +71,7 @@ copy %QTDIR%\plugins\sqldrivers\qsqlite4.dll kueue\sqldrivers
 copy %QTDIR%\plugins\sqldrivers\qsqlodbc4.dll kueue\sqldrivers
 
 copy ..\..\build\kueue.exe kueue\kueue.exe
-copy ..\..\..\..\Downloads\vcredist_x86.exe kueue/vcredist_x86.exe
+copy ..\..\..\..\Downloads\VC_redist_x86.exe kueue/vcredist_x86.exe
 
 REM
 REM The next step assumes that makensis is in %PATH%
