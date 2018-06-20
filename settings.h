@@ -58,6 +58,9 @@ class Settings
         static bool autopickRecipientDisabled();
         static void setAutopickRecipientDisabled( const bool& );
         
+        static bool rememberBodyTemplate();
+        static void setRembemberBodyTemplate( const bool& );
+        
         static bool unityEnabled();
         static void setUnityEnabled( const bool& );
         
