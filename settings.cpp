@@ -137,6 +137,19 @@ void Settings::setAutopickRecipientDisabled( const bool& b )
     settings.sync();
 }
 
+bool Settings::rememberBodyTemplate()
+{
+    QSettings settings;
+    return settings.value( "rememberBodyTemplate", false ).toBool();
+}
+
+void Settings::setRembemberBodyTemplate( const bool& b)
+{
+    QSettings settings;
+    settings.setValue( "rememberBodyTemplate", b);
+    settings.sync();
+}
+
 QString Settings::EmailTemplate()
 {
     QSettings settings;

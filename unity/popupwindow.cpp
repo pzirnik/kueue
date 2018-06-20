@@ -431,38 +431,41 @@ void PopupWindowWebPage::pageLoaded()
         QWebElement select_body;
         QWebElementCollection options_body;      
         
-        // Webpage Email Window Ids are different between SR/CR
-        // SRid=s_5_1_149_1 CRid=s_7_1_149_1
-        // also the number after "s_" does change if you close the
-        // popup and open it again ... WTF ... so we need to match like "s_.*_1_149_1"
-        
-        select_body = mainFrame()->findFirstElement( "select[id^='s_'][id$='_1_149_1']" );
-
-        // select the default template and update the default template if the
-        // users does change it.
-        if (!select_body.attribute( "onchange" ).isEmpty())
+        if (Settings::rememberBodyTemplate())
         {
-            defaultJS = select_body.attribute( "onchange" );
-            options_body = select_body.findAll( "option");
-            for ( int i = 0; i < options_body.count(); i++ )
+            // Webpage Email Window Ids are different between SR/CR
+            // SRid=s_5_1_149_1 CRid=s_7_1_149_1
+            // also the number after "s_" does change if you close the
+            // popup and open it again ... WTF ... so we need to match like "s_.*_1_149_1"
+            
+            select_body = mainFrame()->findFirstElement( "select[id^='s_'][id$='_1_149_1']" );
+
+            // select the default template and update the default template if the
+            // users does change it.
+            if (!select_body.attribute( "onchange" ).isEmpty())
             {
-                if (options_body.at(i).hasAttribute( "selected"))
+                defaultJS = select_body.attribute( "onchange" );
+                options_body = select_body.findAll( "option");
+                for ( int i = 0; i < options_body.count(); i++ )
                 {
-                    Settings::setEmailTemplate(options_body.at(i).attribute( "value" ));
-                    break;
+                    if (options_body.at(i).hasAttribute( "selected"))
+                    {
+                        Settings::setEmailTemplate(options_body.at(i).attribute( "value" ));
+                        break;
+                    }
+                    if (options_body.at(i).attribute( "value" ).contains( Settings::EmailTemplate() ))
+                    {
+                        options_body.at(i).setAttribute( "selected", "Yes");
+                        found=true;
+                    }
                 }
-                if (options_body.at(i).attribute( "value" ).contains( Settings::EmailTemplate() ))
+                // only when we run the first time trigger the javascript
+                // to change the body template
+                if ( mEmailStage == 2 && found)
                 {
-                    options_body.at(i).setAttribute( "selected", "Yes");
-                    found=true;
+                    mEmailStage = 3;
+                    mainFrame()->evaluateJavaScript( defaultJS );
                 }
-            }
-            // only when we run the first time trigger the javascript
-            // to change the body template
-            if ( mEmailStage == 2 && found)
-            {
-                mEmailStage = 3;
-                mainFrame()->evaluateJavaScript( defaultJS );
             }
         }
     }
