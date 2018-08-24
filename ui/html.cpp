@@ -929,20 +929,24 @@ QString HTML::statsPageHeader( Statz s )
                    "<img src='qrc:/images/logo_im_end.gif' width='12' height='80' border='0'></div></div>"
                    "<div id='content'>" );
     
-    if ( sl.isEmpty() || cl.isEmpty() )
+    if ( nr > 0 )
     {
-        return ph + "Updating... come back in 30 minutes ...";
+        ph += csatTableHeader( s.csatRtsPercent, s.csatEngAvg, s.csatSrAvg, nr );
     }
-
-    ph += csatTableHeader( s.csatRtsPercent, s.csatEngAvg, s.csatSrAvg, nr );
+    else
+    {
+        ph += "No cached data available. Check again in 30 minutes ....";
+    }
     
     for ( int i = 0; i < sl.size(); ++i ) 
     {   
         ph += csatTable( sl.at( i ) );
     }
     
-    ph += closedTableHeader( s.closedSr, s.closedCr, s.srTtsAvg );
-    
+    if ( nr > 0 )
+    {
+        ph += closedTableHeader( s.closedSr, s.closedCr, s.srTtsAvg );
+    }
     
     for ( int i = 0; i < cl.size(); ++i ) 
     {   

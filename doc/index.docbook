@@ -15,11 +15,19 @@
       </personname>
       <email>sbogner@suse.com</email>
     </author>
+    <author>
+      <personname>
+        <firstname>Paul</firstname>
+        <surname>Zirnik</surname>
+      </personname>
+      <email>pzirnik@suse.com</email>
+    </author>
   </authorgroup>
 
   <copyright>
-    <year>2012</year>
+    <year>2018</year>
     <holder>Stefan Bogner</holder>
+    <holder>Paul Zirnik</holder>
   </copyright>
 
   <date>DATE</date>
@@ -59,7 +67,7 @@
     </itemizedlist>
   </para>
 
-  <para>For bug reports, feature requests etc please contact <email>sbogner@suse.com</email></para>
+  <para>For bug reports, feature requests etc please contact <email>kueue@suse.de</email></para>
 
 </chapter>
 
@@ -109,11 +117,12 @@
     <para>
         Here you can set which queues you would like to monitor for new SRs. The custom name can be self-defined, the dropdown box will give you a list of available queues.
     </para>
+    <para>In Qmon view you can move SRs/CRs between all your configured queues via the context menu.</para>
 
   </sect1>
 
   <sect1 id="qboss">
-  <title>QBoss</title>
+  <title>Users</title>
    
     <para>This section includes the options for kueue's QBoss features</para>
    
@@ -124,8 +133,7 @@
       </imageobject></mediaobject></screenshot>
     </para>
 
-   <para>If you are qboss you can make your life easier with kueue's QBoss features. You can set a list of engineers that appear as assignees in the defails window of an SR. </para>
-   <para>Also, if you are using KDE/Kopete as IM client, you can have kueue automatically notify an assignee after assignment.</para>
+   <para>If you are qboss you can make your life easier with kueue's QBoss features. You can set a list of engineers that appear as assignees in the details window of an SR. </para>
 
   </sect1>
 
@@ -144,12 +152,13 @@
     <para>
         <itemizedlist>
             <listitem><para>Unity password needs to be set to your innerweb/unity password</para></listitem>
+            <listitem><para>Disable autopicking of email recepient - do not pick a email recepient per default</para></listitem>
+            <listitem><para>Remember email template - remember the last email template you choosed and will automatically select it on next email you compose</para></listitem>
             <listitem><para>Download Directory specifies the directory for Unity to download files to per default</para></listitem>
             <listitem><para>Use DownloadDirectory/SRNUMBER... - if checked, files will automatically be downloaded in seperate directories per SR</para></listitem>
             <listitem><para>Keep download directory clean - This will automatically keep your download directory clean. If an SR is closed, it will be deleted immediately, if it is still open (ie. it changed its assignee), it will be removed after 4 days.</para></listitem>
             <listitem><para>Enable toolbar - enable the unity toolbar with all shortcuts accessible via icons</para></listitem>
             <listitem><para>Automatically extract archives - the name says it all</para></listitem>
-            <listitem><para>Disable autopicking of email recepient - do not pick a email recepient per default</para></listitem>
             <listitem><para>Enable editing with an external Editor - see the feature description in the "Unity Integration" section for details. If you'd like to use this feature, the next 2 options need to be set as well.</para></listitem>
             <listitem><para>Enable reply formatting - If checked, another option for opening in an external editor will appear (formatted, with ">" and linebreak</para></listitem>
             <listitem><para>Open download directory - select either the default filemanager or a custom filemanager to open the download directories.</para>
@@ -211,6 +220,7 @@
 
    <para>The Queue Monitor browser shows an overview about SRs that are currently in selected pseudo queues.</para>
    <para>One can directly assign/take SRs from the context menu or the details window.</para>
+   <para>You can move a SR to a different queue from the context menu</para>
     
    <para>
       <screenshot><screeninfo>Queue Monitor</screeninfo>
@@ -220,6 +230,7 @@
     </para>
     
     <para>As you can see, one can select several queues to be monitored. Kueue will notify when a new SR appears in a queue.</para>
+    <para>The color code visualizes a customer rating. More green -> more important customer. You can setup colors yourself if you like</para> 
     <para>To get more details about an SR/CR, just open the details table. For information on what is shown, please see the screenshot.</para>
     
     <para>     
@@ -262,7 +273,7 @@
 <title>Statistics</title>
 
    <para>The Statistics browser shows some personal statistics, ie. Customer Satisfaction and Closed SRs.</para>
-   <para>It is not yet complete and still very beta.</para>
+   <para>Updates only happen every 30 Minutes, so after a version update it may take 30 Minutes for display something</para>
    
     <para>
       <screenshot><screeninfo>Statistics</screeninfo>
@@ -295,6 +306,19 @@
   <para>kueue comes with an integrated webbrowser that tries to workaround some of the flaws one faces when using the Siebel SI client.</para>
   <para>This chapter describes the features one can use in the Unity browser.</para>
 
+  <sect1 id="setup">
+      <title>Unity Setup</title>
+      <para>It is essential for kueue to work properly that your default query in unity for Service Requests is set to:</para>
+      <para>All Service Requests Across Organizations</para>
+      
+    <para>
+      <screenshot><screeninfo>Unity User Preferences</screeninfo>
+      <mediaobject><imageobject>
+          <imagedata fileref="unity_settings.png" width="95%" format="PNG"/>
+      </imageobject></mediaobject></screenshot>
+    </para>
+  </sect1>
+  
   <sect1 id="shortcut">
   <title>Shortcuts</title>
   
@@ -361,7 +385,7 @@
       </screenshot>
     </para>
     
-    <tip><para>Kueue try to donwload the most recent product menu definition at startup from the Kueue server. The product menu is a XML file that will be placed in the default desktop environment storage area for applications. In KDE for example this is ".local/share/data/nts/kueue" and the filename is productmenu.xml. You can customize the product menu when you place a file called "Myproductmenu.xml" in this location.</para></tip>
+    <tip><para>Kueue try to download the most recent product menu definition at startup from the Kueue server. The product menu is a XML file that will be placed in the default desktop environment storage area for applications. In KDE for example this is ".local/share/data/nts/kueue" and the filename is productmenu.xml. You can customize the product menu when you place a file called "Myproductmenu.xml" in this location.</para></tip>
   
   </sect1>
   

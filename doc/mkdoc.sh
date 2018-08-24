@@ -6,15 +6,16 @@
 #
 
 xsltproc --output index.html /usr/share/xml/docbook/stylesheet/suse/xhtml/chunk.xsl index.docbook
-cp /usr/share/doc/manual/opensuse-manuals_en/susebooks.css html
+mkdir -p html/static/css
+cp /usr/share/xml/docbook/stylesheet/suse/static/css/susebooks.css html/static/css
 
-echo "" >> html/susebooks.css
-echo "body:after {" >> html/susebooks.css
-echo "content:" >> html/susebooks.css
-for i in images/* ; do echo "url($i)" >> html/susebooks.css; done
-echo ";" >> html/susebooks.css
-echo "display: none;" >> html/susebooks.css
-echo "}" >> html/susebooks.css
+echo "" >> html/static/css/susebooks.css
+echo "body:after {" >> html/static/css/susebooks.css
+echo "content:" >> html/static/css/susebooks.css
+for i in images/* ; do echo "url($i)" >> html/static/css/susebooks.css; done
+echo ";" >> html/static/css/susebooks.css
+echo "display: none;" >> html/static/css/susebooks.css
+echo "}" >> html/static/css/susebooks.css
 
 scp -r html/* root@kueue.hwlab.suse.de:/srv/www/htdocs/doc
 scp -r images root@kueue.hwlab.suse.de:/srv/www/htdocs/doc
