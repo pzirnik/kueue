@@ -212,6 +212,8 @@ void QMonBrowser::contextMenu( QMouseEvent* event, const QString& id )
     // Create a custom context menu plus a widget to hold the actual menu
     // This makes it look more like a KMenu (way more beautiful)
     
+    
+    
     QMenu* menu = new QMenu();
             
     QAction* ba = new QAction( menu );
@@ -223,6 +225,28 @@ void QMonBrowser::contextMenu( QMouseEvent* event, const QString& id )
     QAction* on = new QAction( "Open in new Unity browser", menu );
     QWidgetAction* wa = new QWidgetAction( menu );
     
+    QMenu* sm = new QMenu( menu );
+    
+    sm->setTitle("move to ...");
+    sm->setIcon( QIcon( ":/icons/conf/qboss.png" ) );
+    
+    QStringList que = Settings::queuesToMonitor();
+
+    for ( int i = 0; i < que.count(); ++i ) 
+    {
+                QAction* ac;
+                
+                if ( que.at(i).section( "|", 0, 0 ).isEmpty() )
+                {
+                    ac = sm->addAction( que.at(i).section( "|", 1, 1 ) );
+                }
+                else
+                {
+                    ac = sm->addAction( que.at(i).section( "|", 0, 0 ) );
+                }
+                ac->setData( id + "#" + que.at(i).section( "|", 1, 1 ) + "|so" );
+    }
+      
     QFont font = ba->font();
     font.setBold( true );
     
@@ -265,6 +289,10 @@ void QMonBrowser::contextMenu( QMouseEvent* event, const QString& id )
     if ( Settings::unityEnabled() )
     {
         menu->addSeparator();
+        if (!sm->isEmpty() )
+        {
+            menu->addMenu( sm );
+        }
         menu->addAction( ou );
         menu->addAction( on );
     }
@@ -314,6 +342,10 @@ void QMonBrowser::contextMenuItemTriggered( QAction* a )
     {
         TabWidget::newUnityWithSR( a->data().toString().remove( "|on" ) );
     }
+    else if (a->data().toString().contains( "|so" ) )
+    {
+        assignSR( a->data().toString().remove( "|so" ));
+    }
 
 }
 
@@ -339,6 +371,37 @@ void QMonBrowser::toggleSrTable( const QString& id )
             }
         }
     }
+}
+
+void QMonBrowser::assignSR( const QString& data)
+{
+    QString sr;
+    QString queue;
+    
+    sr = data.section( "#", 0, 0 );
+    queue = data.section( "#", 1, 1 );
+    
+    QMessageBox* box = new QMessageBox( this );
+    
+    box->setText( "Moving <b>" + sr + "</b> to " + queue + " ?" );
+    box->setWindowTitle( "Moving" );
+    box->setStandardButtons( QMessageBox::Yes | QMessageBox::No );
+    box->setDefaultButton( QMessageBox::Yes );
+    box->setIcon( QMessageBox::Question );
+    
+    int reply = box->exec();
+    
+    if ( reply == QMessageBox::Yes ) 
+    {
+        showProgress();
+        mSR = "NoTab";
+        mAssign = Network::get( "assign/" + sr + "|" + queue.toUpper(), true);
+        
+        connect( mAssign, SIGNAL( finished() ), 
+                 this, SLOT( assignFinished() ) );
+    }
+    
+    delete box;
 }
 
 void QMonBrowser::takeSR( const QString& sr )
@@ -369,8 +432,8 @@ void QMonBrowser::takeSR( const QString& sr )
 void QMonBrowser::showProgress()
 {
     mProgress = new QProgressDialog( this );
-    mProgress->setWindowTitle( "Assigning SR" );
-    mProgress->setLabelText( "Assigning SR to " + Settings::engineer().toUpper() );
+    mProgress->setWindowTitle( "Assigning/Moving SR/CR" );
+    mProgress->setLabelText( "Assigning/Moving SR/CR" );
     mProgress->setMinimum( 0 );
     mProgress->setMaximum( 0 );
     mProgress->setWindowModality( Qt::WindowModal );
@@ -386,16 +449,16 @@ void QMonBrowser::assignFinished()
     if( mAssign->error() )
     {
             QMessageBox::critical( this, "Error", "Error sending data to Server" );
-            qDebug() << "[QMONBROWSER] Assign error: " << mAssign->errorString();
+            qDebug() << "[QMONBROWSER] Assign/move error: " << mAssign->errorString();
     }
     else
     {
-        qDebug() << "[QMONBROWSER] Assign success: " << mAssign->errorString();
+        qDebug() << "[QMONBROWSER] Assign/move success: " << mAssign->errorString();
         data = mAssign->readAll();
     }
 
     if ( data.startsWith( "ASSIGNED" ) )
-        QMessageBox::critical( this, "Error", "SR already assigned to " + data.split( "|" ).at( 2 ) );
+        QMessageBox::critical( this, "Error", "SR already assigned/moved to " + data.split( "|" ).at( 2 ) );
 
     else if ( data.startsWith( "SR_NOT_FOUND" ) )
         QMessageBox::critical( this, "Error", "SR not found");
@@ -404,15 +467,18 @@ void QMonBrowser::assignFinished()
         QMessageBox::critical( this, "Error", "No SR number specified" );
 
     else if ( data.startsWith( "NO_OWNER" ) )
-        QMessageBox::critical( this, "Error", "No assignee specified" );
+        QMessageBox::critical( this, "Error", "No assignee/target specified" );
 
     else if ( data.startsWith( "FAILURE" ) )
         QMessageBox::critical( this, "Error", "General failure" );
 
     else if ( data.startsWith( "SUCCESS" ) )
     {
-        QMessageBox::information( this, "Done", "SR successfully assigned to " + Settings::engineer() );
-        TabWidget::newUnityWithSR( mSR );
+        QMessageBox::information( this, "Done", "SR successfully assigned/moved" );
+        if (!mSR.contains( "NoTab" ) ) 
+        {
+            TabWidget::newUnityWithSR( mSR );
+        }
         mSR.clear();
     }
     

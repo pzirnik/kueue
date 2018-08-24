@@ -57,6 +57,7 @@ class QMonBrowser : public Browser
         void contextMenuEvent( QContextMenuEvent * ev );
         void contextMenuItemTriggered( QAction* );
         void toggleSrTable( const QString& );
+        void assignSR( const QString& data);
         void takeSR( const QString& );
         void showProgress();
         void assignFinished();
