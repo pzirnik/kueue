@@ -146,7 +146,7 @@ Systray::Systray()
             replies.append( replylist.at( i ).toString() );
         }
         
-        if ( replies.contains( "GNOME" ) ) 
+        if ( replies.contains( "GNOME" ) || replies.contains( "Xfce" )) 
         {
             mIsGnome = true;
         }

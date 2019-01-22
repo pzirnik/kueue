@@ -2,6 +2,7 @@
  <menu_entry name="SUSE Linux Enterprise Server">
    <product>SUSE Linux Enterprise Server 15</product>
    <seperator />
+   <product>SUSE Linux Enterprise Server 12 SP4</product>
    <product>SUSE Linux Enterprise Server 12 SP3</product>
    <product>SUSE Linux Enterprise Server 12 SP2</product>
    <product>SUSE Linux Enterprise Server 12 SP1</product>
@@ -45,6 +46,9 @@
    <product>Subscription Management Tool 11</product>
  </menu_entry>
  <menu_entry name="SUSE Linux Enterprise Desktop">
+   <product>SUSE Linux Enterprise Desktop 15</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Desktop 12 SP4</product>
    <product>SUSE Linux Enterprise Desktop 12 SP3</product>
    <product>SUSE Linux Enterprise Desktop 12 SP2</product>
    <product>SUSE Linux Enterprise Desktop 12 SP1</product>
@@ -53,6 +57,10 @@
  </menu_entry>
  <seperator />
  <menu_entry name="SUSE Linux Enterprise High Availability Extension">
+   <product>SUSE Linux Enterprise High Availability Extension 12 SP4</product>
+   <product>SUSE Linux Enterprise High Availability Extension 12 SP3</product>
+   <product>SUSE Linux Enterprise High Availability Extension 12 SP2</product>
+   <product>SUSE Linux Enterprise High Availability Extension 12 SP1</product>
    <product>SUSE Linux Enterprise High Availability Extension 12</product>
    <seperator />
    <product>SUSE Linux Enterprise High Availability Extension 11 SP4</product>
@@ -66,10 +74,14 @@
    <product>GEO Clustering for SUSE Linux Enterprise High Availability Extension 11 SP2</product>
  </menu_entry>
  <menu_entry name="SUSE Linux Enterprise for SAP">
+   <product>SUSE Linux Enterprise Server for SAP Applications 15</product>
+   <seperator />
+   <product>SUSE Linux Enterprise Server for SAP Applications 12 SP4</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 12 SP3</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 12 SP2</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 12 SP1</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 12</product>
+   <seperator />
    <product>SUSE Linux Enterprise Server for SAP Applications 11 SP4</product>
    <product>SUSE Linux Enterprise for SAP Applications 11 SP3</product>
    <product>SUSE Linux Enterprise Server for SAP Applications 11 SP2</product>
@@ -97,7 +109,7 @@
    <product>SUSE CaaS Platform 1</product>
  </menu_entry>
  <menu_entry name="SUSE Manager">
-   <product>SUSE Manager 3.2 for POWER</product>
+   <product>SUSE Manager 3.2 Server for POWER</product>
    <product>SUSE Manager 3.2 Server</product>
    <product>SUSE Manager 3.2 Proxy</product>
    <seperator />
@@ -112,6 +124,7 @@
  </menu_entry>
  <menu_entry name="SUSE Storage">
    <product>SUSE Enterprise Storage 4</product>
+   <product>SUSE Enterprise Storage 5</product>
  </menu_entry>
  <menu_entry name="SUSE Linux Enterprise Point of Service">
    <product>SUSE Linux Enterprise Point of Service 12 Clients</product>
@@ -132,3 +145,4 @@
    <product>Open Enterprise Server 2015 (OES 2015)</product>
  </menu_entry>
 </PRODUCTMENU>
+

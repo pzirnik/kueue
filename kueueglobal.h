@@ -46,7 +46,6 @@ class KueueGlobal : public QObject
         static void destroy();
         void setAuthError( const bool& );
         bool getAuthError();
-
 };
 
 #endif

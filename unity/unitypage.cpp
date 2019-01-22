@@ -112,14 +112,23 @@ UnityPage::UnityPage( QObject* parent, QString sr )
         loop.exec();
                     
         QString url = r->readAll().trimmed();
+        if (url.isEmpty())
+        {
+                QMessageBox msBox;
+                msBox.setText("Unable to get unityURL from DBserver, please check connection to DBserver. No Unity tab will work ... ");
+                msBox.exec();
+        } 
         Settings::setUnityURL( url );
+        
         
         #ifndef IS_WIN32
         QTest::qSleep( 1000 );
         #endif
     }
     
-    mainFrame()->load( QUrl( Settings::unityURL() ) );
+    if (!Settings::unityURL().isEmpty()) {
+        mainFrame()->load( QUrl( Settings::unityURL() ) );
+    }
    
     mTimer = new QTimer( this );
    

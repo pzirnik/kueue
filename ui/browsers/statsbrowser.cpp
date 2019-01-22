@@ -40,8 +40,29 @@ StatsBrowser::StatsBrowser(QObject* parent)
 {
     qDebug() << "[STATSBROWSER] Constructing";
     
+    m_currentZoom = Settings::zoomFactor();
+    this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
+    m_zoomLevels << 30 << 50 << 67 << 80 << 90;
+    m_zoomLevels << 100;
+    m_zoomLevels << 110 << 120 << 133 << 150 << 170 << 200 << 240 << 300;
+    
     connect( page(), SIGNAL( linkHovered( const QString&, const QString&, const QString& ) ),
-             this, SLOT( urlHovered( const QString&, const QString&, const QString& ) ) );    
+             this, SLOT( urlHovered( const QString&, const QString&, const QString& ) ) );  
+    
+    QShortcut* shortcut_zi = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_Plus) , this );
+    
+    connect( shortcut_zi, SIGNAL( activated() ),
+             this, SLOT( zoomIn() ) );
+    
+    QShortcut* shortcut_zo = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_Minus) , this );
+    
+    connect( shortcut_zo, SIGNAL( activated() ),
+             this, SLOT( zoomOut() ) );
+    
+    QShortcut* shortcut = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_I ), this );
+    
+    connect( shortcut, SIGNAL( activated() ),
+             this, SLOT( openWebInspector() ) );
 }
 
 StatsBrowser::~StatsBrowser()
@@ -56,6 +77,46 @@ void StatsBrowser::update( const QString& html )
     QPoint pos = page()->currentFrame()->scrollPosition();
     page()->currentFrame()->setHtml( html );
     page()->currentFrame()->setScrollPosition( pos );
+    m_currentZoom = Settings::zoomFactor();
+    this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
+}
+
+void StatsBrowser::zoomIn()
+{
+    int i = m_zoomLevels.indexOf(m_currentZoom);
+     Q_ASSERT(i >= 0);
+     if (i < m_zoomLevels.count() - 1)
+          m_currentZoom = m_zoomLevels[i + 1];
+   
+     this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
+     Settings::setzoomFactor(m_currentZoom);
+        
+}
+
+void StatsBrowser::zoomOut()
+{
+    int i = m_zoomLevels.indexOf(m_currentZoom);
+     Q_ASSERT(i >= 0);
+     if (i > 0)
+          m_currentZoom = m_zoomLevels[i - 1];
+   
+     this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
+     Settings::setzoomFactor(m_currentZoom);
+        
+}
+
+void StatsBrowser::openWebInspector()
+{
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    
+    QWidget* w = new QWidget;
+    QGridLayout* l = new QGridLayout;
+    w->setLayout( l );
+    QWebInspector* i = new QWebInspector( w );
+    l->addWidget( i );
+    i->setPage( page() );
+    w->setWindowTitle( "Webinspector - StatsBrowser" );
+    w->show();
 }
 
 void StatsBrowser::filter( const QString& filter )

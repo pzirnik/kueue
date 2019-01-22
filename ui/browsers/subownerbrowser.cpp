@@ -50,8 +50,23 @@ SubownerBrowser::SubownerBrowser( QObject *parent )
     (void)parent;
     
     mOpen = false;
+    m_currentZoom = Settings::zoomFactor();
+    this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
+    m_zoomLevels << 30 << 50 << 67 << 80 << 90;
+    m_zoomLevels << 100;
+    m_zoomLevels << 110 << 120 << 133 << 150 << 170 << 200 << 240 << 300;
     
     connect( page(), SIGNAL( linkHovered( const QString&, const QString&, const QString& ) ), this, SLOT( urlHovered( const QString&, const QString&, const QString& ) ) );
+    
+    QShortcut* shortcut_zi = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_Plus) , this );
+    
+    connect( shortcut_zi, SIGNAL( activated() ),
+             this, SLOT( zoomIn() ) );
+    
+    QShortcut* shortcut_zo = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_Minus) , this );
+    
+    connect( shortcut_zo, SIGNAL( activated() ),
+             this, SLOT( zoomOut() ) );
     
     QShortcut* shortcut = new QShortcut( QKeySequence( Qt::CTRL + Qt::Key_I ), this );
     
@@ -97,6 +112,30 @@ SubownerBrowser::SubownerBrowser( QObject *parent )
 SubownerBrowser::~SubownerBrowser()
 {
     qDebug() << "[SUBOWNERBROWSER] Destroying";
+}
+
+void SubownerBrowser::zoomIn()
+{
+    int i = m_zoomLevels.indexOf(m_currentZoom);
+     Q_ASSERT(i >= 0);
+     if (i < m_zoomLevels.count() - 1)
+          m_currentZoom = m_zoomLevels[i + 1];
+   
+     this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
+     Settings::setzoomFactor(m_currentZoom);
+        
+}
+
+void SubownerBrowser::zoomOut()
+{
+    int i = m_zoomLevels.indexOf(m_currentZoom);
+     Q_ASSERT(i >= 0);
+     if (i > 0)
+          m_currentZoom = m_zoomLevels[i - 1];
+   
+     this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
+     Settings::setzoomFactor(m_currentZoom);
+        
 }
 
 void SubownerBrowser::openWebInspector()
@@ -167,6 +206,8 @@ void SubownerBrowser::update( const QString& html )
     QPoint pos = page()->currentFrame()->scrollPosition();
     page()->currentFrame()->setHtml( html );
     page()->currentFrame()->setScrollPosition( pos );
+    m_currentZoom = Settings::zoomFactor();
+    this->setZoomFactor(static_cast<qreal>(m_currentZoom)/100.0);
 }
 
 void SubownerBrowser::filter( const QString& filter )

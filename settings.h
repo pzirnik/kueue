@@ -417,6 +417,9 @@ class Settings
         
         static QString ratingFcol();
         static void setratingFcol( const QColor& );
+        
+        static int zoomFactor();
+        static void setzoomFactor( const int& );
 };    
 
 #endif

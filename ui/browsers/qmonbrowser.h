@@ -44,12 +44,16 @@ class QMonBrowser : public Browser
         QUrl mUrl;
         QString mFilter;
         QString mSR;
+        int m_currentZoom;
+        QVector<int> m_zoomLevels;
         
     public slots:
         void update( const QString& );
         void filter( const QString& );
         
     private slots:
+        void zoomIn();
+        void zoomOut();
         void openWebInspector();
         void mousePressEvent( QMouseEvent* );
         void urlHovered( const QString&, const QString& = 0, const QString& = 0 );

@@ -79,6 +79,9 @@ void UnityBrowser::createPage( const QString& sr )
     {
         mUnityPage = new UnityPage( this );
     }
+    if (!mUnityPage) {
+        delete this;
+    }
    
     setPage( mUnityPage );
     

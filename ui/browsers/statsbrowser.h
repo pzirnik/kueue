@@ -39,12 +39,17 @@ class StatsBrowser : public Browser
         
     private:
         QUrl mUrl;
+        int m_currentZoom;
+        QVector<int> m_zoomLevels;
         
     public slots:
         void update( const QString& );
         void filter( const QString& );
          
     private slots:
+        void zoomIn();
+        void zoomOut();
+        void openWebInspector();
         void mousePressEvent( QMouseEvent* event );
         void urlHovered( const QString&, const QString&, const QString& );
         void contextMenu( QMouseEvent*, const QString& );

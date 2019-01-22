@@ -39,6 +39,10 @@ ConfigDialog::ConfigDialog( QWidget *parent )
             : Ui_ConfigDialog()
 {
     (void)parent;
+    
+    m_zoomLevels << 30 << 50 << 67 << 80 << 90;
+    m_zoomLevels << 100;
+    m_zoomLevels << 110 << 120 << 133 << 150 << 170 << 200 << 240 << 300;
 
     setupUi( this );
     
@@ -302,6 +306,7 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     highNotificationSoundButton->setEnabled( Settings::highNotificationSound() );
     highNotificationPlayButton->setEnabled( Settings::highNotificationSound() );
     
+    cfg_zoomLevel->setValue( getZoomFactor() );
     
     ratingAbutton->setAutoFillBackground(true);
     ratingAbutton->setFlat(true);
@@ -521,12 +526,15 @@ void ConfigDialog::writeSettings()
     Settings::setHighNotificationPopup( cfg_highNotificationPopup->isChecked() );
     Settings::setHighNotificationSound( cfg_highNotificationSound->isChecked() );
     Settings::setHighNotificationSoundFile( cfg_highNotificationSoundFile->text() );
+    
     Settings::setratingAcol( ratingAcol );
     Settings::setratingBcol( ratingBcol );
     Settings::setratingCcol( ratingCcol );
     Settings::setratingDcol( ratingDcol );
     Settings::setratingEcol( ratingEcol );
     Settings::setratingFcol( ratingFcol );
+    
+    Settings::setzoomFactor( m_zoomLevels.at(cfg_zoomLevel->value()) );
     
     emit settingsChanged();
 }
@@ -892,6 +900,18 @@ void ConfigDialog::setButtonFColor( const QColor& color ) {
     ratingFbutton->setPalette(pal);
     ratingFcol = color;
 }
+
+int ConfigDialog::getZoomFactor()
+{
+    int scale = Settings::zoomFactor();
+    int zoom = m_zoomLevels.indexOf(scale);
+    if (zoom != -1)
+    {
+        return zoom;
+    }
+    return 5;
+}
+
 
 BasicConfig::BasicConfig()
 {

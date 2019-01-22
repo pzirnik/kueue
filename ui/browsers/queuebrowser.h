@@ -42,12 +42,16 @@ class QueueBrowser : public Browser
         QUrl mUrl;
         bool mOpen;
         BusyWidget* mBusyWidget;
+        int m_currentZoom;
+        QVector<int> m_zoomLevels;
         
     public slots:
         void update( const QString& );
         void filter( const QString& );
         
     private slots:
+        void zoomIn();
+        void zoomOut();
         void openWebInspector();
         void showOnlyAwaitingSupport();
         void showOnlyAwaitingCustomer();

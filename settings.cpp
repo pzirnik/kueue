@@ -34,13 +34,19 @@
 QString Settings::dBServer()
 {
     QSettings settings;
-    return settings.value( "DBServer" ).toString();
+    QString server;
+    server = settings.value( "DBServer" ).toString();
+    server.remove(QRegExp("^http[s].://"));
+    return server;
 }
 
 void Settings::setdBServer( const QString& s )
 {
     QSettings settings;
-    settings.setValue( "DBServer", s );
+    QString server;
+    server = s;
+    server.remove(QRegExp("^http[s].://"));
+    settings.setValue( "DBServer", server );
     settings.sync();
 }
         
@@ -1673,5 +1679,18 @@ void Settings::setratingFcol( const QColor& color )
 {
     QSettings settings;
     settings.setValue( "ratingFcol", color.name() );
+    settings.sync();
+}
+
+int Settings::zoomFactor()
+{
+    QSettings settings;
+    return settings.value( "zoomLevel", 100 ).toInt();
+}
+
+void Settings::setzoomFactor( const int& i )
+{
+    QSettings settings;
+    settings.setValue( "zoomLevel", i );
     settings.sync();
 }

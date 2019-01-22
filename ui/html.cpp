@@ -935,7 +935,7 @@ QString HTML::statsPageHeader( Statz s )
     }
     else
     {
-        ph += "No cached data available. Check again in 30 minutes ....";
+        ph += csatTableHeader( 0, 0, 0, 0 );
     }
     
     for ( int i = 0; i < sl.size(); ++i ) 
@@ -943,7 +943,7 @@ QString HTML::statsPageHeader( Statz s )
         ph += csatTable( sl.at( i ) );
     }
     
-    if ( nr > 0 )
+    if ( cl.size() > 0 )
     {
         ph += closedTableHeader( s.closedSr, s.closedCr, s.srTtsAvg );
     }

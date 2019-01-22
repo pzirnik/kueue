@@ -49,6 +49,7 @@ class ConfigDialog : public QDialog, private Ui_ConfigDialog
         QColor ratingDcol;
         QColor ratingEcol;
         QColor ratingFcol;
+        QVector<int> m_zoomLevels;
             
     private slots:
         void writeSettings();
@@ -113,7 +114,9 @@ class ConfigDialog : public QDialog, private Ui_ConfigDialog
         void setButtonEColor( const QColor& color );
         void changeButtonEColor();
         void setButtonFColor( const QColor& color );
-        void changeButtonFColor();     
+        void changeButtonFColor();  
+        
+        int getZoomFactor();
         
     signals:
         void settingsChanged();
